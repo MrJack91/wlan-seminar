@@ -5,117 +5,26 @@
 Folgende Aufgabenstellung wurde direkt aus dem \gls{ebsLabel} entnommen.
 
 \subsection{Ausgangslage}
-In letzter Zeit nehmen die Möglichkeiten der Technik sehr rasch zu. Es kommen immer mehr erschwingliche, neue Technologien auf den Markt. Besonders für Entwickler, bietet dies vielseitige und interessante Möglichkeiten.
+Im Geschäftsbereich, wie auch in privaten Haushalten wird Wireless sehr oft genutzt.
+Wireless bietet dem Nutzer viele Vorteile und Freiheiten. Nebst einer wirelessfähigen Netzwerkkarte, die meist im Endgerät schon eingebaut ist, wird keine zusätzliche Hardware pro Benutzer (resp. Gerät) benötigt.
 
-So stellt die Firma Bitcraze programmierbare Drohnen zur Verfügung. Ebenso kann von der Firma Leap Motion ein Handerkennungs-Sensor bezogen werden.
+Da die Verbindung via Funk ist, eignet sich Wireless für mobile Geräte.
 
 \subsection{Ziel der Arbeit}
-Eine programmierbare Drohne (Crazyflie Nano Quadcopter von Bitcraze) soll mit einer Steuerung per Hand (Gestensteuerung von Leap Motion) ergänzt werden.
-Die Drohne soll intuitiv und einfach mit Möglichkeiten der Hand-/Gestenerkennung gesteuert werden können.
+In dieser Arbeit soll eine Übersicht über momentan verbreiteten (sprich nicht nur den aktuellen) Wireless Security Standards und deren Schwachstellen aufgezeigt werden.
+Mögliche Angriffe auf Sicherheitsrisiken sollen exemplarisch, im geschützten Bereich, ausgetestet werden.
 
 \subsection{Aufgabenstellung}
-\subsubsection{Recherche}
+Im Rahmen der Arbeit sollen folgende Aufgaben recherchiert und durchgeführt werden:
 \begin{itemize}
-	\item Geschichte der Drohnen
-	\item Flugeigenschaften der Drohnen
-	\item bereits bestehende Gestensteuerung für Drohnen
-	\begin{itemize}
-		\item Umsetzungsart
-		\item Steuermöglichkeiten
-		\item Umsetzungen mit gleicher Hardware (Leap Motion, BitCraze Crazyflie 2.0)
-	\end{itemize}
-\end{itemize}
-
-
-\subsubsection{Ist-Analyse}
-\begin{itemize}
-	\item Gesten Sensor
-	\begin{itemize}
-		\item Einsatz
-		\item Technische Details
-		\item API
-	\end{itemize}
-	
-	\item Drohne analysieren
-	\begin{itemize}
-		\item Drohnen Sensoren charakterisieren (Analyse, Tests)
-			\begin{itemize}
-				\item Accelerometer, Gyrometer, Magnetometer, Pressure
-			\end{itemize}
-	\end{itemize}
-	
-	\begin{itemize}
-		\item Bestehende Steuerungen auf Flugstabilität analysieren
-		\begin{itemize}
-			\item Inwiefern werden die Sensoren zur Flugstabilität genutzt?
-		\end{itemize}
-	\end{itemize}
-\end{itemize}
-
-
-\subsubsection{Soll-Analyse}
-\begin{itemize}
-	\item Definition einer gestensteuerbare Drohne (Yaw, Pitch, Roll, Thrust)
-\end{itemize}
-
-
-\subsubsection{Konzept}
-\begin{itemize}
-	\item detailierter Gesten-Steuerbeschrieb
-	\item Mögliche Probleme behandeln (mind. schriftlich)
-	\begin{itemize}
-		\item Gestenerkennung
-		\item Kommunkationsprobleme
-	\end{itemize}
-	\item (für die erwähnten Punkte sollen direkt schon Testszenarien erfasst werden)
-\end{itemize}
-
-
-\subsubsection{Proof-of-Concept}
-\begin{itemize}
-	\item Umsetzung der Gestensteuerung
-\end{itemize}
-
-
-\subsubsection{Testing}
-\begin{itemize}
-	\item Erstellung und Durchführung des Testplans (Testszenarien aus Konzept durchführen)
-	\item Steuerung stand-alone testen (nur Konsolen-Output)
+	\item Übersicht über aktuell verbreiteten Wireless Security Standards
+	\item Bekannte Schwachstellen je Standard, inkl. Beschreibung und Durchführung von Angriffen
+	\item Definition "sichere/sicherste Wireless Konfiguration" aus heutiger Sicht
 \end{itemize}
 
 \subsection{Erwartete Resultate}
-\subsubsection{Recherche}
-\begin{itemize}
-	\item Erwähnte Themen in der Aufgabenstellung müssen schriftlich abgedeckt werden.
-\end{itemize}
-
-\subsubsection{Ist-Analyse}
-\begin{itemize}
-	\item Gesten-Sensor soll beschrieben sein
-	\item Drohne (inkl. Sensoren) soll beschrieben sein
-\end{itemize}
-
-\subsubsection{Soll-Analyse}
-\begin{itemize}
-	\item Schriftliche Definition einer Umsetzung für eine gestensteuerbare Drohne
-\end{itemize}
-
-\subsubsection{Konzept}
-\begin{itemize}
-	\item Schriftlicher detailierter Gestensteuerbeschrieb
-	\item Schriftliche Auflistung möglicher Probleme
-\end{itemize}
-
-\subsubsection{Proof-of-Concept}
-\begin{itemize}
-	\item Gestensteuerbare Drohne
-\end{itemize}
-
-\subsubsection{Testing}
-\begin{itemize}
-	\item Auswertung des Testplanes
-	\item Gesten-Steuersimulation (Konsolen-Output)
-\end{itemize}
+Das resultierende Dokument soll eine Übersicht der momentan verbreiteten Wireless Standards und deren Sicherheits-Risiken aufzeigen.
+Zudem sollen mögliche Angriffe beschrieben und durchgeführt werden.
 
 
 \subsection{Eingrenzung}
