@@ -51,7 +51,7 @@ Mit dem \textit{Scan} Programm können verfügbare Netze und deren Channels gefu
 	\caption{Scanner -- OS X Wireless Diagnostics}
 \end{figure}
 
-Mit dem \textit{Sniffer} können benötigte Daten auf einem konkreten Netz aufgezeichnet werden. Es werden ca. 5'000 \gls{ivLabel}'s benötigt um den Schlüssel zu berechnen. (Diese Aufzeichnung (capture) dauert unterschiedlich lange, je nach Nutzung des Netzes. Wird das Netz viel gebraucht, geht es rascher.)
+Mit dem \textit{Sniffer} können benötigte Daten auf einem konkreten Netz aufgezeichnet werden. Es werden ca. 5'000 \gls{ivLabel}'s benötigt um den Schlüssel zu berechnen. (Diese Aufzeichnung (capture) dauert unterschiedlich lange, je nach Nutzung des Netzes. Wird das Netz viel gebraucht, geht es schneller.)
 
 \begin{figure}[H]
 	\centering
@@ -70,9 +70,14 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 sudo airport en0 sniff <CHANNEL>
 \end{lstlisting}
 
-Anschliessend können die Daten, vom \textit{Sniffer} mit dem \textit{aircrack-ng} ausgewertet werden.
+Anschliessend können die Daten, vom \textit{Sniffer} mit dem \textit{aircrack-ng} ausgewertet werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aircrack-ng -b 00:0f:cc:b0:1a:c8 /private/tmp/airportSniff*.cap
 \end{lstlisting}
 
-
+So wird einem, falls genügend \gls{ivLabel}'s vorhanden sind, der \gls{wepLabel} ausgegeben (Dauer: 2 Sek.).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/wep/aircrack-ng.png}
+	\caption{aircrack-ng -- Terminalausgabe}
+\end{figure}
