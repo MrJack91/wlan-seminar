@@ -20,15 +20,28 @@ Der Angriff auf ein Netzwerk mit Clients ist einfacher, kann jedoch mehr Geduld 
 Ein durchgeführtes Beispiel ist im \secref{sec:wepAttack} dokumentiert.
 
 
-
-
-
 \subsection{Angriff ohne einem Opfer Client (WEP)}
-\todo{Angriff ohne Opfer Client kurz erläutern}
+Ein Angriff auf ein Netzwerk ohne Clients ist aufwändiger. Er wird folgend kurz erläutert.
 
-\section{Konkreter Angriff}
+Der Angriff besteht aus folgenden Schritten:\footcite[][129f.]{WrightCache201503}
+\begin{enumerate}
+	\item Daten eines Channels aufzeichnen (mit \texttt{airodump-ng}, ergibt eine \textit{*.cap} Datei)
+	\item erfolgreiche Verbindung vortäuschen (mit \texttt{aireplay-ng  -{}-fakeauth})
+	\item \textit{Fragmentation} \texttt{(aireplay-ng -{}-fragment)} oder \textit{ChopChop} \texttt{(aireplay-ng -{}-chopchop)} Angriff
+	\item Eigenes broadcast \gls{arpLabel} Paket bauen (mit \texttt{packetforge-ng -{}-arp})
+	\item \gls{arpLabel} an \gls{apLabel} senden (inject) (mit \texttt{aireplay-ng -{}-interactive})
+	\item Aufzeichnung von Schritt 1 knacken (mit \texttt{aircrack-ng})
+\end{enumerate}
+
+\begin{framed}
+	\textbf{Bemerkung:} Dieser Angriff wurde nicht durchgeführt, da das \textit{inject} (senden eines selbst gebauten Paketes) nur von speziellen Netzwerkkarten unterstützt wird.\footcite[][89f.]{WrightCache201503}
+	Zu jenen die des \textit{Mac Book Air's} nicht gehört.
+\end{framed}
+
+
+\section{Konkreter WEP Angriff auf ein Netzwerk mit einem Opfer Client}
 \label{sec:wepAttack}
-\todo{Einleitungstext}
+Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgeführt.
 
 \subsection{Setup}
 \subsubsection{Hardware}
