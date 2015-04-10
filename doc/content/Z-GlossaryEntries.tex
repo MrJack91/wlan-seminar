@@ -11,9 +11,12 @@
 
 \newacronym{macLabel}{MAC}{Media Access Control}
 
+\newacronym{wlanLabel}{WLAN}{Wireless Local Area Network}
 
 \newacronym{wepLabel}{WEP}{Wire Equivalency Protocol}
 \newacronym{wpaLabel}{WPA}{Wi-Fi Protected Access}
+\newacronym{wpa2Label}{WPA2}{Wi-Fi Protected Access 2}
+\newacronym{wpsLabel}{WPS}{Wi-Fi Protected Setup}
 
 \newacronym{apLabel}{AP}{Access Point}
 \newacronym{ibssLabel}{IBSS}{Independent Basic Service Set}
@@ -27,23 +30,30 @@
 \newacronym{rtsLabel}{RTS}{Ready to send}
 \newacronym{ctsLabel}{CTS}{Clear to send}
 
+\newacronym{ieeeLabel}{IEEE}{Institute of Electrical and Electronics Engineers}
+\newacronym{usbLabel}{USB}{Universal Serial Bus}
+\newacronym{nfcLabel}{NFC}{Near Field Communication}
+
+
+
+
 }
 
-% special acronyms (used with glossary entry and see option)
-\newglossaryentry{ssidLabel}{
-	type=\acronymtype,
-	name={SSID},
-	description={Service Set ID},
-	first={Service Set ID (SSID)\glsadd{glos:ssidLabel}},
-	see=[Glossary:]{glos:ssidLabel}
-}
-\newglossaryentry{bssidLabel}{
-	type=\acronymtype,
-	name={BSSID},
-	description={Basic Service Set ID},
-	first={Basis Service Set ID (BSSID)\glsadd{glos:bssidLabel}},
-	see=[Glossary:]{glos:bssidLabel}
-}
+%% special acronyms (used with glossary entry and see option)
+%\newglossaryentry{ssidLabel}{
+%	type=\acronymtype,
+%	name={SSID},
+%	description={Service Set ID},
+%	first={Service Set ID (SSID)\glsadd{glos:ssidLabel}},
+%	see=[Glossary:]{glos:ssidLabel}
+%}
+%\newglossaryentry{bssidLabel}{
+%	type=\acronymtype,
+%	name={BSSID},
+%	description={Basic Service Set ID},
+%	first={Basis Service Set ID (BSSID)\glsadd{glos:bssidLabel}},
+%	see=[Glossary:]{glos:bssidLabel}
+%}
 
 %%% --- Symbol list entries
 
@@ -70,38 +80,44 @@
 		Der Modus entspricht dem \textit{promiscuous mode} von kabelgebundenen Netzwerken.}
 }
 
-\newglossaryentry{glos:ssidLabel}{
-	name={Service Set ID},
-	description={Mit der \textit{Service Set ID (SSID)} wird ein gesamtes Netzwerk identifiziert. Die \gls{ssidLabel} entspricht dem sichtbaren Netzwerknamen und kann sich über mehrere \gls{apLabel}'s erstrecken.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}}
+%Glossary entries used also as acronyms
+\newglossaryentry{ssidLabel}{
+	name={SSID},
+	description={Mit der \textit{Service Set ID (SSID)} wird ein gesamtes Netzwerk identifiziert. Die \textit{SSID} entspricht dem sichtbaren Netzwerknamen und kann sich über mehrere \gls{apLabel}'s erstrecken.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}},
+	first={Service Set ID (SSID)},
+	long={Service Set ID}
 }
 
-\newglossaryentry{glos:bssidLabel}{
-	name={Basic Service Set ID},
-	description={Mit der \textit{Basic Service Set ID (BSSID)} wird ein \gls{apLabel} identifiziert.
-		Die \gls{bssidLabel} entspricht meist der \gls{macLabel}-Adresse des \gls{apLabel}'s und wird nicht manuell vergeben.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}}
+\newglossaryentry{bssidLabel}{
+	name={BSSID},
+	description={Mit der \textit{Basis Service Set ID (BSSID)} wird ein \gls{apLabel} identifiziert.
+		Die \textit{BSSID} entspricht meist der \gls{macLabel}-Adresse des \gls{apLabel}'s und wird nicht manuell vergeben.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}},
+	first={Basis Service Set ID (BSSID)},
+	long={Basis Service Set ID}
 }
 
+%\newglossaryentry{glos:ssidLabel}{
+%	name={Service Set ID},
+%	description={Mit der \textit{Service Set ID (SSID)} wird ein gesamtes Netzwerk identifiziert. Die \gls{ssidLabel} entspricht dem sichtbaren Netzwerknamen und kann sich über mehrere \gls{apLabel}'s erstrecken.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}}
+%}
+
+%\newglossaryentry{glos:bssidLabel}{
+%	name={Basic Service Set ID},
+%	description={Mit der \textit{Basic Service Set ID (BSSID)} wird ein \gls{apLabel} identifiziert.
+%		Die \gls{bssidLabel} entspricht meist der \gls{macLabel}-Adresse des \gls{apLabel}'s und wird nicht manuell vergeben.\footcite{Understanding_the_Network_Terms_SSID_BSSID_and_ESSID_Technical_Documentation_Support_2015-04-10}}
+%}
 
 
-%% Example for combined glossary and acronym: http://tex.stackexchange.com/questions/8946/how-to-combine-acronym-and-glossary
-%\newglossaryentry{apig}{
+% Example for combined glossary and acronym: http://tex.stackexchange.com/questions/8946/how-to-combine-acronym-and-glossary
+%\newglossaryentry{api11}
+%{
 %	name={API},
 %	description={An Application Programming Interface (API) is a particular set
-%		of rules and specifications that a software program can follow to access and
-%		make use of the services and resources provided by another particular software
-%		program that implements that API
-%			%\footcite{...}
-%	}
+%		of rules and specifications that a software program can follow to access and make use of the services and resources provided by another particular software program that implements that API},
+%	first={Application Programming Interface (API)},
+%	long={Application Programming Interface}
 %}
-%
-%%%% define the acronym and use the see= option
-%\newglossaryentry{api}{
-%	type=\acronymtype,
-%	name={API},
-%	description={Application Programming Interface},
-%	first={Application Programming Interface (API)\glsadd{apig}},
-%	see=[Glossary:]{apig}
-%}
+
 %% use \gls{api}
 
 % use it with \gls{glos:DVD}
