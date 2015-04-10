@@ -5,13 +5,8 @@ sinax3
 verschlüsselungscode 1:
 80a2868803
 
-sonst
-sinax3sinax3
-
 
 sudo airodump-ng --channel 7 --bssid 00:0f:cc:b0:1a:c8 --write test-crack-ng-wep awdl0
-
-http://easymactips.blogspot.ch/2011/07/kraken-has-been-released.html
 
 // Sniffer tool von Network utilities
 // worked

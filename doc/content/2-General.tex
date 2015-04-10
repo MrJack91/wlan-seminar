@@ -1,15 +1,17 @@
 \chapter{Allgemein}
 
+\todo{add Einleitungstext}
+
 \section{Modus}
 Eine drahtlose Umgebung kann in zwei verschiedenen Modis betrieben werden.
-Meist funktioniert die Kommunikation via einen \gls{apLabel}, über der alles läuft. Der \gls{apLabel} leitet die Pakete weitere und kontrolliert die Verbindung.
+Meist funktioniert die Kommunikation via einen \gls{apLabel}, über den alles läuft. Der \gls{apLabel} leitet die Pakete weitere und kontrolliert die Verbindungen.
 Nebst der \gls{apLabel}-Variante gibt es noch ad-hoc oder \gls{ibssLabel} Modus. Auch hier gibt es einen \gls{apLabel}, aber die Pakete müssen nicht zwingend über jenen geleitet werden, sondern die Stationen können direkt miteinander kommunizieren.\footcite[][38]{WrightCache201503}
 
 \section{Paket Typ}
-Die Pakete können in drei Kategorien unterschieden werden:
+Die Pakete können in drei Kategorien eingeteilt werden:
 \begin{itemize}
 	\item Data (Daten): Mit \textit{Data}-Paketen werden alle Informationen bezeichnet, die grundsätzlich übertragen werden müssen.
-	\item Management (Verwaltung): \textit{Management} Pakete bezeichnet alle Pakete, welche Informationen zum Netzwerk bereitstellen (z.B. Beacons und Deauthentication Pakete)
+	\item Management (Verwaltung): \textit{Management} Pakete sind alle Pakete, welche Informationen zum Netzwerk bereitstellen (z.B. Beacons und Deauthentication Pakete)
 	\item Control (Kontrolle): \textit{Control}-Pakete steuern die Kommunikation. Sie regeln z.B. wer wann senden darf (z.B.: \gls{rtsLabel} und \gls{ctsLabel}).
 \end{itemize}
 
@@ -20,7 +22,7 @@ Jedes Paket beinhaltet, nebst Quell- und Zieladresse, auch eine \gls{bssidLabel}
 \section{Verschlüsselungstechnik}
 Es gibt zwei Arten auf welche die Kommunikation verschlüsselt werden kann: \gls{wepLabel} (\chapref{ch:wep}) und \gls{wpaLabel} (\chapref{ch:wpa}).
 Beide Arten unterstützen die \gls{pskLabel} Methode, bei der für alle Nutzer der gleiche Schlüssel für Authentifizierung und Verschlüsselung verwendet wird.
-\gls{wpaLabel} bietet alternativ auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pskLabel} Schlüssel generiert. Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet, für den privaten Gebrauch lohnt sich der Einrichtungsaufwand und Betrieb eines eigenen Servers nicht.
+\gls{wpaLabel} bietet alternativ auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} Schlüssel generiert. Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet; für den privaten Gebrauch lohnt sich der Einrichtungsaufwand und Betrieb eines eigenen Servers nicht.
 
 \section{Attacken}
 
@@ -28,12 +30,12 @@ Beide Arten unterstützen die \gls{pskLabel} Methode, bei der für alle Nutzer d
 Netzwerke können grob in drei Sicherheitslevel eingestuft werden:\footcite[][115]{WrightCache201503}
 \begin{itemize}
 	\item \textbf{Geringe Sicherheit:} Von geringer Sicherheit spricht man, wenn man ohne oder mit sehr geringen Aufwand Sicherheitsmassnahmen umgehen kann.
-	\item \textbf{Mittlere Sicherheit:} Mittlerer Sicherheit, kann mit mässigem Einsatz von Ressourcen (Zeit und Wissen) umgangen werden (z.B. \gls{wepLabel}-Schlüssel oder ein schwacher \gls{wpaLabel}-Schlüssel).
+	\item \textbf{Mittlere Sicherheit:} Mittlerer Sicherheit, kann mit mässigem Einsatz von Ressourcen (Zeit und Wissen) umgangen werden (z.B. ein \gls{wepLabel}-Schlüssel oder ein schwacher \gls{wpaLabel}-Schlüssel).
 	\item \textbf{Hohe Sicherheit:} Hohe Sicherheitsmassnahmen können kaum oder nur mit extremen Aufwand umgangen werden.
 \end{itemize}
 
 \subsection{Angriffsarten}
-%todo aktiv/passiv
+\todo{add aktiv/passiv}
 
 \subsection{Angriffsziele}
 Ziel eines Angriffes kann das Abhören (evt. inkl. Manipulation) oder der vollständigen Netzwerkzugriff (via \gls{pskLabel}) sein.
@@ -42,8 +44,8 @@ Meist wird der vollständige Netzwerkzugriff angestrebt, da dann auch alle Kommu
 \section{Test Umgebung (Soft- und Hardware)}
 \label{sec:testEnvroiment}
 \subsection{System}
-Für die praktischen Beispiele wurde ein Apple \textit{Mac Book Air}(early 2014) mit einem 1.4GHz Intel Core i5 Prozessor und 8 GB RAM verwendet. Als Grafikkarte wurde die eingebaute, standard \textit{Intel HD Graphics 5000} mit 1536 MB Shared Memory, verwendet
-Als Betriebssystem wurde die OS X Version 10.10.2 \textit{"`Yosemite"'} verwendet.
+Für die praktischen Beispiele wurde ein Apple \textit{Mac Book Air (early 2014)} mit einem 1.4GHz Intel Core i5 Prozessor und 8 GB RAM verwendet. Als Grafikkarte wurde die eingebaute, standard \textit{Intel HD Graphics 5000} mit 1536 MB Shared Memory verwendet.
+Als Betriebssystem wurde die OS X Version 10.10.2/3 \textit{Yosemite} verwendet.
 
 Als Netzwerkkarte wurde die eingebaute \textit{AirPort Extreme} mit der Firmware \textit{Broadcom BCM43xx 1.0 (7.15.159.13.12)} verwendet.
 
