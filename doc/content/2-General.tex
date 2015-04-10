@@ -1,6 +1,6 @@
 \chapter{Allgemein}
-
-\todo{add Einleitungstext}
+\chapref{ch:general}
+Dieses einleitende \chapref{ch:general} gibt einen groben Überblick zum Thema Wireless. Es wird auf Modis, Paket Typen, Paket Adressen, Verschlüsselungstechniken (allgemein) und Attacken eingegangen.
 
 \section{Modus}
 Eine drahtlose Umgebung kann in zwei verschiedenen Modis betrieben werden.
@@ -11,7 +11,7 @@ Nebst der \gls{apLabel}-Variante gibt es noch ad-hoc oder \gls{ibssLabel} Modus.
 Die Pakete können in drei Kategorien eingeteilt werden:
 \begin{itemize}
 	\item Data (Daten): Mit \textit{Data}-Paketen werden alle Informationen bezeichnet, die grundsätzlich übertragen werden müssen.
-	\item Management (Verwaltung): \textit{Management} Pakete sind alle Pakete, welche Informationen zum Netzwerk bereitstellen (z.B. Beacons und Deauthentication Pakete)
+	\item Management (Verwaltung): \textit{Management} Pakete sind alle Pakete, welche Informationen zum Netzwerk bereitstellen (z.B. \glspl{glos:beaconLabel} und Deauthentication Pakete)
 	\item Control (Kontrolle): \textit{Control}-Pakete steuern die Kommunikation. Sie regeln z.B. wer wann senden darf (z.B.: \gls{rtsLabel} und \gls{ctsLabel}).
 \end{itemize}
 
@@ -21,8 +21,9 @@ Jedes Paket beinhaltet, nebst Quell- und Zieladresse, auch eine \gls{bssidLabel}
 
 \section{Verschlüsselungstechnik}
 Es gibt zwei Arten auf welche die Kommunikation verschlüsselt werden kann: \gls{wepLabel} (\chapref{ch:wep}) und \gls{wpaLabel} (\chapref{ch:wpa}).
-Beide Arten unterstützen die \gls{pskLabel} Methode, bei der für alle Nutzer der gleiche Schlüssel für Authentifizierung und Verschlüsselung verwendet wird.
-\gls{wpaLabel} bietet alternativ auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} Schlüssel generiert. Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet; für den privaten Gebrauch lohnt sich der Einrichtungsaufwand und Betrieb eines eigenen Servers nicht.
+Beide Arten unterstützen die \gls{pskLabel} (vorzeitig ausgetauschte Schlüssel) Methode, bei der für alle Nutzer der gleiche Schlüssel für Authentifizierung und Verschlüsselung verwendet wird.
+\gls{wpaLabel} bietet alternativ auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} Schlüssel generiert.
+Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet; lohnt sich aber für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
 
 \section{Attacken}
 
@@ -35,7 +36,18 @@ Netzwerke können grob in drei Sicherheitslevel eingestuft werden:\footcite[][11
 \end{itemize}
 
 \subsection{Angriffsarten}
-\todo{add aktiv/passiv}
+Es grundsätzlich zwei Angriffsarten: \textit{aktiv} und \textit{passiv}.
+\begin{itemize}
+	\item \textbf{aktiv:}
+	Bei der aktiven Angriffsart werden mit Hilfe verfügbaren Informationen (z.B. von \glspl{glos:beaconLabel}) verschiedene "`Erforschungs"' (probe) Requests verschickt.
+	Es wird auf Antworten die weitere wichtige Informationen verraten gehofft.
+	Der generelle Datenverkehr kann mit aktiv Tools nicht abgehört werden.
+
+	\item \textbf{passiv:}
+	Passiv Angriffe sind mächtiger. Dazu wird die Netzwerkkarte in den \gls{glos:monitorModeLabel} umgeschaltet.
+	So können alle Pakete eines Channels, unabhängig der \gls{ssidLabel}'s (sprich über mehrere Netzwerke), abgefangen werden.
+
+\end{itemize}
 
 \subsection{Angriffsziele}
 Ziel eines Angriffes kann das Abhören (evt. inkl. Manipulation) oder der vollständigen Netzwerkzugriff (via \gls{pskLabel}) sein.
