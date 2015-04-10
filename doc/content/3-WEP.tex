@@ -21,16 +21,27 @@ Ein durchgeführtes Beispiel ist im \secref{sec:wepAttack} dokumentiert.
 
 
 \subsection{Angriff ohne einem Opfer Client (WEP)}
-Ein Angriff auf ein Netzwerk ohne Clients ist aufwändiger. Er wird folgend kurz erläutert.
-
-Der Angriff besteht aus folgenden Schritten:\footcite[][129f.]{WrightCache201503}
+Ein Angriff auf ein Netzwerk ohne Clients ist aufwändiger.
+Die notwendigen Schritten des Angriffes werden kurz erläutert:\footcite[][129f.]{WrightCache201503}
 \begin{enumerate}
-	\item Daten eines Channels aufzeichnen (mit \texttt{airodump-ng}, ergibt eine \textit{*.cap} Datei)
-	\item erfolgreiche Verbindung vortäuschen (mit \texttt{aireplay-ng  -{}-fakeauth})
-	\item \textit{Fragmentation} \texttt{(aireplay-ng -{}-fragment)} oder \textit{ChopChop} \texttt{(aireplay-ng -{}-chopchop)} Angriff
-	\item Eigenes broadcast \gls{arpLabel} Paket bauen (mit \texttt{packetforge-ng -{}-arp})
-	\item \gls{arpLabel} an \gls{apLabel} senden (inject) (mit \texttt{aireplay-ng -{}-interactive})
-	\item Aufzeichnung von Schritt 1 knacken (mit \texttt{aircrack-ng})
+	\item Daten eines Channels aufzeichnen\\
+	\texttt{airodump-ng} (ergibt eine \textit{*.cap} Datei)
+	
+	\item erfolgreiche Verbindung vortäuschen\\
+	\texttt{aireplay-ng  -{}-fakeauth}
+	
+	\item \textit{Fragmentation-} oder \textit{ChopChop-Angriff}\\
+	\texttt{(aireplay-ng -{}-fragment)} oder \texttt{(aireplay-ng -{}-chopchop)}
+	
+	\item Eigenes broadcast \gls{arpLabel} Paket bauen\\
+	\texttt{packetforge-ng -{}-arp}
+	
+	\item \gls{arpLabel} an \gls{apLabel} senden (inject)\\
+	\texttt{aireplay-ng -{}-interactive}
+	
+	\item Aufzeichnung von Schritt 1 knacken\\
+	\texttt{aircrack-ng}
+	
 \end{enumerate}
 
 \begin{framed}
