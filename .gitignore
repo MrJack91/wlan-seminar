@@ -161,5 +161,8 @@ docs/_build/
 # PyBuilder
 target/
 
+#sensitive data
 practise/data/wordlist.txt
 practise/data/yhxXXXX.cap
+practise/data/YHX-02427.hccap
+practise/data/eula.accepted

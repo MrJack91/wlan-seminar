@@ -55,11 +55,11 @@ Dieser Schlüssel kann aus 8 bis 63 druckbaren \gls{asciiLabel} Zeichen bestehen
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{images/wpa/four-way-handshake.png}
-	\caption[WPA: The four-way handshake]{WPA: \textit{The four-way handshake} (Quelle: \fullcite[][151]{WrightCache201503})}
+	\caption[WPA: The four-way handshake]{WPA: \textit{The four-way handshake} (Quelle: \cite[][151]{WrightCache201503})}
 \end{figure}
 Der \textit{Four-Way Handshake} bezeichnet den Zugriff eines Clients auf das Netzwerk.
 Bei einer Verbindung zum Netzwerk wird beidseitig aus dem \gls{pskLabel} und der \gls{ssidLabel} der \gls{pmkLabel} berechnet.
-Dafür wird 4096 der Hash (HMAC-SHA1) des \gls{pskLabel} berechnet. (Dies macht einen Bruteforce Angriff so aufwändig.)
+Dafür wird 4096 der Hash (HMAC-SHA1) des \gls{pskLabel} berechnet. (Dies macht einen \gls{glos:bruteforceLabel}-Angriff so aufwändig.)
 Der \gls{apLabel} überträgt dem Client eine zufällige Zahl (\textit{A-nonce}), welche der Client mit einer weiteren zufälligen Zahl (\textit{B-nonce}) ergänzt.
 Der \gls{apLabel} berechnet aus den zufälligen Zahlen und den beiden \gls{macLabel}-Adressen einen temporären \gls{ptkLabel}, der pro Session neu generiert wird. Der \gls{ptkLabel} wird zudem auch während einer Session periodisch ausgetauscht.\footcite[][40f.]{WrightCache201503}
 
@@ -96,20 +96,19 @@ Falls sich keine Clients neu anmelden, können bestehende Clients rausgeschmisse
 aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 \end{lstlisting}
 \begin{tabular}{l l}
-	\textbf{Parameter} & \textbf{Bedeutung}
-	--deauth 1 & 64 packages to deauthenticate\\
-	-a:	& \gls{apLabel} \gls{macLabel}-Address\\
-	-c:	& Client \gls{macLabel}-Address\\
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	-{}-deauth 1 & 64 packages to deauthenticate\\
+	-a	& \gls{apLabel} \gls{macLabel}-Address\\
+	-c	& Client \gls{macLabel}-Address\\
 	en0 & Interface
 \end{tabular}
 
 \subsection{Bruteforce}
-\todo{Bruteforce to glossary}
+\todo{Bruteforce bei glossary ergänzen}
 Der Rest des Angriffs kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle Keys durchprobiert.
-Es gibt verschiedene Programme die den Bruteforce durchführen können.
+Es gibt verschiedene Programme die den \gls{glos:bruteforceLabel} durchführen können.
 Einige davon sind im \cref{subsec:wpa_attack_tutorial} dokumentiert.
 
-\todo{glossary: onpremise von cloud übernehmen}
 Die Berechnung ist je nach Schlüssellänge sehr intensiv und wird daher oft statt von der \gls{cpuLabel}, von der \gls{gpuLabel} ausgerechnet.
 Zudem kann Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechner, in der \textit{"`\gls{glos:cloudLabel}"'} berechnet werden.
 
@@ -117,22 +116,136 @@ Zudem kann Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechn
 \subsection{Konkreter Angriff auf ein WPA Netzwerk}
 \label{subsec:wpa_attack_tutorial}
 
+\todo{comment back}
+% Folgend wurden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
+
+\subsubsection{Daten bereinigen}
+Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir initial mit \textit{Pyrit} alle überflüssigen Daten aus dem \textit{capture}:
 \begin{lstlisting}[style=lstStyleFramed]
-pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip
+pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip]
 \end{lstlisting}
+Anschliessend wird nach der gewünschten \gls{ssidLabel} gefragt.
+Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
+Es werden nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel} behalten.
 
+\subsubsection{Aircrack-ng Bruteforce}
+Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel} Angriff ausgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
-aircrack-ng yhxXXXX.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
+aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \end{lstlisting}
+\begin{tabular}{l l}
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	*.cap & \textit{capture}-Datei mit den Handshakes\\
+	-w	& Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
+	-b	& \gls{bssidLabel} des \gls{apLabel}\\
+\end{tabular}
 
-
+\subsubsection{Pyrit Bruteforce}
+Alternativ kann mit Pyrit ebenfalls ein \gls{glos:bruteforceLabel} Angriff durchgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
 \end{lstlisting}
+\begin{tabular}{l l}
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	*.cap & \textit{capture}-Datei mit den Handshakes\\
+	-i	& Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
+	-b	& \gls{bssidLabel} des \gls{apLabel}\\
+	attack\_passthrough & die ausgerechneten Hashes sollen nicht zwischengespeichert werden\\
+\end{tabular}
+
+
+\subsubsection{Hashcat Bruteforce}
+Um auch noch mit \textit{Hashcat} einen \gls{glos:bruteforceLabel} Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
+
+\begin{framed}
+	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{aircrack-ng} Version "`1.2-rc2"' benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{aircrack-ng} Website beschrieben.\\
+	Auch wenn beim Kompilieren Fehler geworfen werden, befindet sich anschliessend ein \textit{aircrack-ng} im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
+\end{framed}
+
+\begin{lstlisting}[style=lstStyleFramed]
+./aircrack-ng -J YHX-02427 yhxXXXX_strip.cap
+\end{lstlisting}
+\begin{tabular}{l l}
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	-J & \gls{ssidLabel} des Netzwerkes\\
+	*.cap & \textit{capture}-Datei mit den Handshakes\\
+\end{tabular}
+Nach der Eingabe, werden alle verfügbaren \gls{ssidLabel}'s aufgelistet, von denen die gewünschte ausgewählte werden kann.
+Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. In unserem Fall: \textit{YHX-02427.hccap}.
+
+Nebst dem werden einem \textit{A-nonce (anonce)} , \textit{B-nonce (snonce)}und der \textit{\gls{micLabel} (Key MIC)} angezeigt.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
+	\caption{Strip capture -- \textit{aircrack-ng}}
+\end{figure}
+
+Wie bisher können wir erneut einen Wörterbuch Angriff starten:
+\begin{lstlisting}[style=lstStyleFramed]
+hashcat -m 2500 YHX-02427.hccap wordlist.txt
+\end{lstlisting}
+\begin{tabular}{l l}
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	-m & Hash Type (2500 = WPA/WPA) (\textit{hashcat -h} um alle anzuzeigen)\\
+	*.hccap & \textit{capture}-Datei mit den Handshakes\\
+	*.txt & Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
+\end{tabular}
+
+Zudem kann \textit{Hashcat} auch Passwörter mit Platzhalter knacken:\footcite{mask_attack_hashcat_wiki_2015-04-13}
+\begin{lstlisting}[style=lstStyleFramed]
+hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1?1?1?1-?1?1?1?1-?1?1?1?1
+\end{lstlisting}
+\begin{tabular}{l l}
+	\textbf{Parameter} & \textbf{Bedeutung}\\
+	-m & Hash Type (2500 = WPA/WPA) (\textit{hashcat -h} um alle anzuzeigen)\\
+	-a 3 & \textit{Attack mode} (3 = Bruteforce)\\
+	--pw-min/max & min. und max. Länge des \gls{pskLabel}\\
+	*.hccap & \textit{capture}-Datei mit den Handshakes\\
+	-1 & Pattern mit alphanumerisch (nur Kleinbuchstaben \textit{?l} und Zahlen \textit{?d})\\
+	\[mask\] & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
+\end{tabular}
+Obwohl wir sehr viele Angaben zum Passwort haben und die Länge nicht übermässig gewählt ist, können wir das Knacken vergessen.
+Die Dauer geht weit über 10 Jahre.
+
+%$ 36^{16} = 7.95866111 * 10^{24} $
+
+\todo{plot function}
+% (36^16) / 1180 / 60 / 60 / 24 / 365
+% 2.13870752767523 * 10^{15}
+% 1.18k words/sec
+
+% normale nutzung der cpu
+% hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d 99nl-uk1v-wrke-?1?1?1?1
+% 1.13k words
+% 73308/1679616 (4.36%) -> 23.5 min
+% (36^4) / 1130 / 60 = 24.773097345
+
+%\begin{figure}[H]
+%	\pgfplotsset{width=0.8\textwidth, height=0.6\textwidth}
+%	\centering
+%	\begin{tikzpicture}
+%	\begin{axis}[
+%	xlabel=$x$,
+%	ylabel={$f(x) = x^2 - x +4$}
+%	]
+%	% use TeX as calculator:
+%	\addplot {x^2 - x +4};
+%	\end{axis}
+%	\end{tikzpicture}
+%\end{figure}
 
 
 
+%IMAGE: hashcat_bruteforce_pattern
 
-% aircrack-ng -J YHX-02427 yhxXXXX_strip.cap
+
+\todo{Intro mit aktuellem Netzwerk beschreiben -> yhx -> passwort bekannteheiten}
+\todo{YHX-xxxx immer ausschreiben, da image auch so ist}
+
+\todo{Doppel Dash in code listings kontrollieren}
+
+\todo{Performance Tests -> wörterbuchangriff erweitern}
+\todo{Genaue Versionen der Programme}
+
 
 
