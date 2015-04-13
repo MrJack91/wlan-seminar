@@ -1,6 +1,11 @@
+%\begin{wrapfigure}{r}{0.9\textwidth}
+%	\includegraphics[width=1.0\linewidth]{images/wpa/four-way-handshake.png}
+%	\caption[WPA: The four-way handshake]{WPA: \textit{The four-way handshake} (Quelle: \fullcite[][151]{WrightCache201503})}
+%\end{wrapfigure}
+
 \chapter{Allgemein}
-\chapref{ch:general}
-Dieses einleitende \chapref{ch:general} gibt einen groben Überblick zum Thema Wireless. Es wird auf Modis, Paket Typen, Paket Adressen, Verschlüsselungstechniken (allgemein) und Attacken eingegangen.
+\label{ch:general}
+Dieses einleitende \chapref{ch:general} gibt einen groben Überblick zum Thema Wireless. Es wird auf Modis, Paket Typen, Paket Adressen, Verschlüsselungstechniken (allgemein) und Angriffe eingegangen.
 
 \section{Modis}
 Eine drahtlose Umgebung kann in zwei verschiedenen Modis betrieben werden.
@@ -23,7 +28,7 @@ Jedes Paket beinhaltet, nebst Quell- und Zieladresse, auch eine \gls{bssidLabel}
 Es gibt zwei Arten auf welche die Kommunikation verschlüsselt werden kann: \gls{wepLabel} (\chapref{ch:wep}) und \gls{wpaLabel} (\chapref{ch:wpa}).
 Beide Arten unterstützen die \gls{pskLabel} (vorzeitig ausgetauschte Schlüssel) Methode, bei der für alle Nutzer der gleiche Schlüssel für Authentifizierung und Verschlüsselung verwendet wird.
 
-\section{Attacken}
+\section{Angriffe}
 
 \subsection{Sicheheitslevel}
 Netzwerke können grob in drei Sicherheitslevel eingestuft werden:\footcite[][115]{WrightCache201503}
@@ -55,8 +60,22 @@ Meist wird der vollständige Netzwerkzugriff angestrebt, da dann auch alle Kommu
 \label{sec:testEnvroiment}
 \subsection{System}
 Für die praktischen Beispiele wurde ein Apple \textit{Mac Book Air (early 2014)} mit einem 1.4GHz Intel Core i5 Prozessor und 8 GB RAM verwendet. Als Grafikkarte wurde die eingebaute, standard \textit{Intel HD Graphics 5000} mit 1536 MB Shared Memory verwendet.
-Als Betriebssystem wurde die OS X Version 10.10.2/3 \textit{Yosemite} verwendet.
+Als Betriebssystem ist die OS X Version 10.10.2/3 \textit{Yosemite} installiert.
 
-Als Netzwerkkarte wurde die eingebaute \textit{AirPort Extreme} mit der Firmware \textit{Broadcom BCM43xx 1.0 (7.15.159.13.12)} verwendet.
+Die eingebaute Netzwerkkarte \textit{AirPort Extreme} mit der Firmware \textit{Broadcom BCM43xx 1.0 (7.15.159.13.12)} unterstützt das Aufzeichnen aller \gls{wlanLabel}-Daten im \textit{monitor mode} (\textit{sniffing}), jedoch kein Senden von manipulierten Paketen (\textit{packet-injection}).
+%Als Netzwerkkarte wurde die eingebaute \textit{AirPort Extreme} mit der Firmware \textit{Broadcom BCM43xx 1.0 (7.15.159.13.12)} verwendet.
 
-Falls nichts anderes erwähnt wird, wurde immer soeben beschriebene Hardware verwendet.
+Falls nichts anderes erwähnt wird, wurde immer soeben beschriebenes System verwendet.
+
+
+\subsection{Software}
+\textit{Mac OS X} stellt, innerhalb von Xcode\footcite{Xcode_Apple_Developer_2015-04-06}, bereits nützliche Wireless Analyse Tools unter dem Namen \textit{Wireless Diagnostics} zur Verfügung.
+
+\begin{framed}
+	\textbf{Bemerkung:} Obwohl das \textit{KisMac2}\footcite{IGR_Software_KisMac2_2015-04-06} viel erwähnt wird, hat sich dieses Programm während dieser Arbeit nicht bewährt. Es stürzte vermehrt ab. Darum die Empfehlung mit dem von \textit{Wireless Diagnostics} bereitgestellten \textit{airport} Konsolen-Programm zu arbeiten.
+\end{framed}
+
+Zudem kann via \textit{Homebrew}\footcite{Homebrew__The_missing_package_manager_for_OS_X_2015-04-06} die \textit{Aircrack-ng 1.1}\footcite{Aircrack-ng_2015-04-06} Programm Sammlung installiert werden.
+\textit{\textit{Aircrack-ng}} unterstützt \textit{Mac OS X} zwar nicht vollständig, es können aber folgende Pakete genutzt werden: \textbf{\textit{aircrack-ng}}, \textit{packetforge-ng}, \textit{ivstools} and \textit{makeiv}.
+
+Anstelle von \textit{airodump-ng}, wird das OS X Konsolen-Programm \textit{airport} verwendet.

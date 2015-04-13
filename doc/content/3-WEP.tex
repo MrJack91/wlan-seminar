@@ -51,7 +51,7 @@ Die notwendigen Schritten des Angriffes werden kurz erläutert:\footcite[][129f.
 \end{framed}
 
 
-\section{Konkreter WEP Angriff auf ein Netzwerk mit einem Opfer Client}
+\section{Konkreter Angriff auf ein WEP Netzwerk mit einem Opfer Client}
 \label{sec:wepAttack}
 Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgeführt.
 
@@ -59,15 +59,8 @@ Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgef�
 \subsubsection{Hardware}
 Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein ältere Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen Passwort eingerichtet.
 
-\subsubsection{Software}
-OS X stellt, innerhalb von Xcode\footcite{Xcode_Apple_Developer_2015-04-06}, bereits nützliche Wireless Analyse Tools zur Verfügung.
-Zudem kann via \textit{Homebrew}\footcite{Homebrew__The_missing_package_manager_for_OS_X_2015-04-06} die \textit{aircrack-ng}\footcite{Aircrack-ng_2015-04-06} Programm Sammlung installiert werden.
-
-\begin{framed}
-	\textbf{Bemerkung:} Obwohl das \textit{KisMac2}\footcite{IGR_Software_KisMac2_2015-04-06} viel erwähnt wird, hat sich dieses Programm während dieser Arbeit nicht bewährt. Es stürzte vermehrt ab. Darum die Empfehlung mit dem von Xcode bereitgestellten "`airport"' Konsolen-Programm zu arbeiten.
-\end{framed}
-
 \subsection{Ausführung}
+\label{subsec:wep_crack_tutorial}
 Mit dem "`Wireless Diagnostics"' Tool von Apple kann via \textit{Window} $\rightarrow$ das \textit{Scan} und das \textit{Sniffer} Programm geöffnet werden.
 Mit dem \textit{Scan} Programm können verfügbare Netze und deren Channels gefunden werden.
 

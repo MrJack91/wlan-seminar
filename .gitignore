@@ -160,3 +160,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+practise/data/wordlist.txt
+practise/data/yhxXXXX.cap
