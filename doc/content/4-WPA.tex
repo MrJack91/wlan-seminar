@@ -3,27 +3,31 @@
 
 
 \section{WPA Einführung}
-\todo{pre-shared (incl. WPS) or enterprise}
-
 Das \gls{wpaLabel} Protokoll wurde als notwendiger Nachfolger des \gls{wepLabel} Protokolls definiert.
-Auch war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, war aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen. So wurde Anfangs 2013 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
+Auch war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, war aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen. So wurde Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
 Seit September 2004 gibt es zertifizierte \gls{wpa2Label} Netzwerkgeräte. Der \gls{wpa2Label} entspricht nun dem \textit{\gls{ieeeLabel} 802.11i} Standard.\footcite{Wi-Fi_Protected_Access__Wikipedia_2015-04-10}\footcite{WPA2__Wikipedia_2015-04-10}
 
+\subsection{Sicherheit}
 Der \gls{wpa2Label} Standard gilt bis heute als sicher.
-Ein erfolgreicher Angriff muss via Bruteforce und Wörterbuch Angriff geschehen, was relativ unmöglich ist, vorausgesetzt es wird ein sicherer \gls{pskLabel} verwendet (ab 16 zufälligen alphanumerischen Zeichen).
+Ein erfolgreicher Angriff muss via Bruteforce und Wörterbuch Angriff geschehen, was relativ unmöglich ist, vorausgesetzt es wird ein sicherer \gls{pskLabel} verwendet (mind. 16 zufälligen alphanumerischen Zeichen).
+
+Die ganze Sicherheit basiert auf dem \gls{pskLabel}.
+Sobald der bekannt ist, kann eine Verbindung vollständig abgehört werden.
+Sprich trotz einem sicherem Schlüssel, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, insofern die nicht anderswo verschlüsselt werden (z.B. mit \gls{httpsLabel}).
+
 
 \subsection{Schlüsselaustausch}
 % going on
 Voraussetzung für den gewöhnlichen Schlüsselaustausch ist der Besitz des \gls{pskLabel} (entspricht dem \textit{passphrase}).
-Dieser Schlüssel kann aus 8 bis 63 druckbaren ASCII Zeichen bestehen.
+Dieser Schlüssel kann aus 8 bis 63 druckbaren \gls{asciiLabel} Zeichen bestehen.
 
 Bei einer Verbindung zum Netzwerk wird beidseitig aus dem \gls{pskLabel} und der \gls{ssidLabel} der \gls{pmkLabel} berechnet.
-Der \gls{apLabel} überträgt dem Client eine zufällige Zahl \textit{A-nonce}, welche der Client mit einer weiteren zufälligen Zahl ergänzt \textit{B-nonce}.
-Der \gls{apLabel} berechnet aus den zufälligen Zahlen und den beiden \gls{macLabel}-Adressen einen temporären \gls{ptkLabel}, der pro Session neu generiert wird. Der \gls{ptkLabel} wird zudem auch während eines Session periodisch neu ausgewechselt.\footcite[][40f.]{WrightCache201503}
+Der \gls{apLabel} überträgt dem Client eine zufällige Zahl (\textit{A-nonce}), welche der Client mit einer weiteren zufälligen Zahl (\textit{B-nonce}) ergänzt.
+Der \gls{apLabel} berechnet aus den zufälligen Zahlen und den beiden \gls{macLabel}-Adressen einen temporären \gls{ptkLabel}, der pro Session neu generiert wird. Der \gls{ptkLabel} wird zudem auch während einer Session periodisch ausgetauscht.\footcite[][40f.]{WrightCache201503}
 
 \subsection{Authentifizierungs-Varianten}
 \gls{wpaLabel} bietet nebst der \gls{pskLabel} Methode, auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} Schlüssel generiert.
-Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet; lohnt sich aber für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
+Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet, lohnt sich aber für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
 Deshalb wird in dieser Arbeit auf die \gls{pskLabel} Methode eingegangen.
 
 \subsubsection{WPS Standard}
@@ -31,16 +35,16 @@ Der \gls{wpsLabel} Standard entspricht nicht einer eigener Zugriffs Methode, son
 
 Dazu gibt es folgende vier Methoden:\footcite{Wi-Fi_Protected_Setup_-_Wikipedia_the_free_encyclopedia_2015-04-10}
 \begin{itemize}
-	\item \textbf{PIN:} Beim \gls{apLabel} muss ein 8-stelliger PIN des Clients eingegeben werden oder umgekehrt.
+	\item \textbf{PIN:} Ein 8-stelliger PIN des einen Gerätes muss auf dem anderen eingegeben werden.
 	\item \textbf{Push button:} Per Kopfdruck am \gls{apLabel} wird eine zweiminütige Beitrittsphase des Netzwerkes gestartet.
-	\item \textit{\gls{nfcLabel}:} Die Daten werden via \gls{nfcLabel} ausgetauscht (nur innerhalb kurzer Distanz möglich).
-	\item \textit{\gls{usbLabel}:} Die Netzinformationen werden via externen \gls{usbLabel} ausgetauscht.
+	\item \textbf{\gls{nfcLabel}:} Die Daten werden via \gls{nfcLabel} ausgetauscht (was nur innerhalb kurzer Distanz möglich ist).
+	\item \textbf{\gls{usbLabel}:} Die Netzinformationen werden via externen \gls{usbLabel} Storage ausgetauscht.
 \end{itemize}
 
 Die PIN Methode gilt als besonders unsicher, da lediglich eine 7-stellige Zahl erraten werden muss (die letzte entfällt, da sie einer Checksumme entspricht).
 Als Gegenmassnahme kann eine automatische zeitliche Sperre nach fehlgeschlagenen Versuchen eingestellt werden.\footcite{viehboeck_wps_2015-04-10}
 
-\textbf{Push button} und \textit{\gls{nfcLabel}} sind anfällig auf ungewollte Nutzer, wenn der \gls{apLabel} an einem unbewachten Ort steht und sich so jeder authentifizieren kann.
+\textit{Push button} und \textit{\gls{nfcLabel}} sind anfällig auf ungewollte Nutzer, wenn der \gls{apLabel} an einem unbewachten Ort steht und sich so jemand selbst authentifizieren kann.
 
 
 
