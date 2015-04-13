@@ -1,7 +1,6 @@
 \chapter{Wi-Fi Protected Access (WPA)}
 \label{ch:wpa}
 
-
 \section{WPA Einführung}
 Das \gls{wpaLabel} Protokoll wurde als notwendiger Nachfolger des \gls{wepLabel} Protokolls definiert.
 Auch war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, war aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen. So wurde Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
@@ -116,8 +115,7 @@ Zudem kann Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechn
 \subsection{Konkreter Angriff auf ein WPA Netzwerk}
 \label{subsec:wpa_attack_tutorial}
 
-\todo{comment back}
-% Folgend wurden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
+Folgend wurden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
 
 \subsubsection{Daten bereinigen}
 Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir initial mit \textit{Pyrit} alle überflüssigen Daten aus dem \textit{capture}:
@@ -209,7 +207,6 @@ Die Dauer geht weit über 10 Jahre.
 
 %$ 36^{16} = 7.95866111 * 10^{24} $
 
-\todo{plot function}
 % (36^16) / 1180 / 60 / 60 / 24 / 365
 % 2.13870752767523 * 10^{15}
 % 1.18k words/sec
@@ -220,32 +217,48 @@ Die Dauer geht weit über 10 Jahre.
 % 73308/1679616 (4.36%) -> 23.5 min
 % (36^4) / 1130 / 60 = 24.773097345
 
-%\begin{figure}[H]
-%	\pgfplotsset{width=0.8\textwidth, height=0.6\textwidth}
-%	\centering
-%	\begin{tikzpicture}
-%	\begin{axis}[
-%	xlabel=$x$,
-%	ylabel={$f(x) = x^2 - x +4$}
-%	]
-%	% use TeX as calculator:
-%	\addplot {x^2 - x +4};
-%	\end{axis}
-%	\end{tikzpicture}
-%\end{figure}
+\begin{figure}[H]
+	\begin{minipage}[b]{.45\linewidth}
+	   	\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$x$ = Passwortlänge},
+				ylabel={$t$ = Rechenzeit \textbf{Stunden}}
+			]
+				\addplot[draw=blue][domain=0:4.8]{(36^x) / 1180 / 60 / 60};
+			\end{axis}
+		\end{tikzpicture}
+		\subcaption{Rechenzeit in \textbf{Stunden}}\label{fig:1a}
+	\end{minipage}%
+	\begin{minipage}[b]{.45\linewidth}
+		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$x$ = Passwortlänge},
+				ylabel={$t$ = Rechenzeit \textbf{Jahren}}
+			]
+				\addplot[draw=blue][domain=0:7.6]{(36^x) / 1180 / 60 / 60 / 24 / 365};
+			\end{axis}
+		\end{tikzpicture}
+		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
+	\end{minipage}
+	\caption{Rechenzeit in Abhängigkeit der Passwortlänge}\label{fig:1}
+\end{figure}
 
 
 
 %IMAGE: hashcat_bruteforce_pattern
 
-
-\todo{Intro mit aktuellem Netzwerk beschreiben -> yhx -> passwort bekannteheiten}
-\todo{YHX-xxxx immer ausschreiben, da image auch so ist}
-
-\todo{Doppel Dash in code listings kontrollieren}
-
-\todo{Performance Tests -> wörterbuchangriff erweitern}
-\todo{Genaue Versionen der Programme}
+%\todo{plot function}
+%\todo{Intro mit aktuellem Netzwerk beschreiben -> yhx -> passwort bekannteheiten}
+%\todo{YHX-xxxx immer ausschreiben, da image auch so ist}
+%
+%\todo{Doppel Dash in code listings kontrollieren}
+%
+%\todo{Performance Tests -> wörterbuchangriff erweitern}
+%\todo{Genaue Versionen der Programme}
 
 
 
