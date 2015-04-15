@@ -88,7 +88,7 @@ So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 \section{Angriff auf WPA}
 
-\subsection{Angriff Methode}
+\subsection{Angriffsmethode}
 Für einen erfolgreichen Angriff müssen mindestens zwei Teile eines \textit{Four-Way Handshake} vorliegen.
 Dazu müssen die Aktivitäten eines Channel, wie im \cref{subsec:wep_crack_tutorial} wird, abgehört und gespeichert werden (z.B. mit \textit{airport}).
 
@@ -120,14 +120,50 @@ Manche Programme unterstützen auch Passwortmasken, durch die nebst der Schlüss
 \subsection{Konkreter Angriff auf ein WPA-Netzwerk}
 \label{subsec:wpa_attack_tutorial}
 
-Folgend werden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
-
 In diesem \cref{subsec:wpa_attack_tutorial} basieren viele Inhalte auf dem Buch "`Hacking Exposed Wireless"'.\footcite[][148f.]{WrightCache201503}
+
+\subsubsection{Testumgebung}
+
+Folgend wird das \gls{wpa2Label}-Testnetz mit der \gls{ssidLabel} \textit{YHX-02427} als Angriffsziel verwendet.
+Das Netz wird durch den aktuellen Swisscom-Router \textit{Centro grande} zur Verfügung gestellt. \footcite{Centro_grande_Analog_Standard_-_WLAN_Router_Swisscom_2015-04-15}
+
+Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entsprechen dem Auslieferungszustandes.
+Darum sind folgende Eigenschaften des \gls{pskLabel}'s im Vorhinein bekannt:
+\begin{itemize}
+	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`--"' (Minus).
+	\item Eine vierstellige Zeichenfolge besteht ausschliesslich aus Kleinbuchstaben und Zahlen, ansonsten kommen keine andere Zeichen darin vor.
+\end{itemize}
+
+Es werden drei verschiedene Programme (\textit{crack utilities}) verwendet:
+%\footcite{Aircrack-ng_2015-04-06}
+%\footcite{pyrit_Google_Project_Hosting_2015-04-13}
+%\footcite{hashcat_advanced_password_recovery_2015-04-13}
+\begin{table}[H]
+% style
+\small\sffamily\centering\renewcommand{\arraystretch}{1.4}
+% caption
+\captionabove{Verwendete Programme}
+%tabular
+\rowcolors{1}{tablebodycolor}{tablerowcolor}
+\begin{tabular}{l l l}
+\hline
+\rowcolor{tableheadcolor}
+  \bfseries Name  &
+  \bfseries Version(en) &
+  \bfseries Link \\
+\hline
+  \textbf{aircrack-ng} & 1.1, 1.2\_rc2 & \url{http://www.aircrack-ng.org/}\\
+  \textbf{pyrit} & 0.4.0 & \url{https://code.google.com/p/pyrit/}\\
+  \textbf{hashcat} & 0.49 & \url{http://hashcat.net/hashcat}\\
+\hline
+\end{tabular}
+\end{table}
+
 
 \subsubsection{Datenbereinigung}
 Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir mit \textit{pyrit} alle überflüssigen Daten aus dem \textit{capture}:
 \begin{lstlisting}[style=lstStyleFramed]
-pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip
+pyrit -r YHX-02427_raw.cap -o YHX-02427.cap strip
 \end{lstlisting}
 Anschliessend wird man aufgefordert die gewünschte \gls{ssidLabel} auszuwählen.
 Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
@@ -136,7 +172,7 @@ Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
 \subsubsection{Aircrack-ng Bruteforce}
 Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
-aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
+aircrack-ng YHX-02427.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
@@ -148,7 +184,7 @@ aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \subsubsection{Pyrit Bruteforce}
 Alternativ kann mit \textit{pyrit} ebenfalls ein \gls{glos:bruteforceLabel}-Angriff durchgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
-pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
+pyrit -r YHX-02427.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
@@ -163,7 +199,7 @@ pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrou
 Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
 
 \begin{lstlisting}[style=lstStyleFramed]
-./aircrack-ng -J YHX-02427 yhxXXXX_strip.cap
+./aircrack-ng -J YHX-02427 YHX-02427.cap
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
@@ -280,14 +316,7 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 
 
 
-%IMAGE: hashcat_bruteforce_pattern
+%\todo{IMAGE: hashcat_bruteforce_pattern hinzufügen}
 
-%\todo{plot function}
-%\todo{Intro mit aktuellem Netzwerk beschreiben -> yhx -> passwort bekannteheiten}
-%\todo{YHX-xxxx immer ausschreiben, da image auch so ist}
-%\todo{Titel schreibt über version: 3.3}
-
-%\todo{Doppel Dash in code listings kontrollieren}
-%
 %\todo{Performance Tests -> wörterbuchangriff erweitern}
 %\todo{Genaue Versionen der Programme}

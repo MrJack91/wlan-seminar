@@ -163,9 +163,8 @@ target/
 
 #unimportant data
 trash_*
+practise/data/YHX-02427_raw.cap
 
 #sensitive data
 practise/data/wordlist.txt
-practise/data/fullCaptureWPA.cap
-practise/data/YHX-02427.hccap
 practise/data/eula.accepted
