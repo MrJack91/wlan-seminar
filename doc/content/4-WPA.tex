@@ -3,30 +3,34 @@
 
 \section{WPA Einführung}
 Das \gls{wpaLabel} Protokoll wurde als notwendiger Nachfolger des \gls{wepLabel} Protokolls definiert.
-Auch war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, war aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen. So wurde Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
-Seit September 2004 gibt es zertifizierte \gls{wpa2Label} Netzwerkgeräte. Der \gls{wpa2Label} entspricht nun dem \textit{\gls{ieeeLabel} 802.11i} Standard.\footcite{Wi-Fi_Protected_Access__Wikipedia_2015-04-10}\footcite{WPA2__Wikipedia_2015-04-10}
-\gls{wpaLabel} nutzt \gls{tkipLabel} zur Verschlüsselung, während \gls{wpa2Label} \gls{aesLabel} verwendet.
+Zur selben Zeit war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, der aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen war.
+So wurden Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
+Seit September 2004 gibt es zertifizierte \gls{wpa2Label} Netzwerkgeräte. Das \gls{wpa2Label} Protokoll entspricht nun dem \textit{\gls{ieeeLabel} 802.11i} Standard.
+\gls{wpaLabel} nutzt das \gls{tkipLabel} zur Verschlüsselung, während \gls{wpa2Label} den \gls{aesLabel} verwendet.\footcite{Wi-Fi_Protected_Access__Wikipedia_2015-04-10}\footcite{WPA2__Wikipedia_2015-04-10}
 
 \subsection{Sicherheit}
-Der \gls{wpa2Label} Standard gilt bis heute als sicher und sollte als einziger Standard verwendet werden.
+Das \gls{wpa2Label} Protokoll gilt bis heute als sicher und sollte als einziges verwendet werden.
 
-Da \gls{wpaLabel} und \gls{wpa2Label} sehr viele Ähnlichkeiten aufweisen, wird folgend der Begriff \gls{wpaLabel} übergreifend für beide Standards verwendet. Bei Differenzen wird die jeweilige Version explizit genannt.
+Da \gls{wpaLabel} und \gls{wpa2Label} sehr viele Ähnlichkeiten aufweisen, wird folgend der Begriff \gls{wpaLabel} übergreifend für beide Standards verwendet. Bei Differenzen wird die jeweilige Version explizit bezeichnet.
 
-Ein erfolgreicher Angriff muss via Bruteforce und Wörterbuch Angriff geschehen, was relativ unmöglich ist, vorausgesetzt es wird ein sicherer \gls{pskLabel} verwendet (mind. 16 zufälligen alphanumerischen Zeichen).
+Ein erfolgreicher Angriff kann bisher nur via \gls{glos:bruteforceLabel}- und Wörterbuch-Angriff erfolgen, was relativ unmöglich ist, vorausgesetzt es wird ein \textit{sicherer} \gls{pskLabel} verwendet.
+
+\todo{Box mit sicherem Passwort:  (mind. 16 zufälligen alphanumerischen Zeichen)}
 
 Die ganze Sicherheit basiert auf dem \gls{pskLabel}.
-Sobald der bekannt ist, kann eine Verbindung vollständig abgehört werden.
-Sprich trotz einem sicherem Schlüssel, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, insofern die nicht anderswo verschlüsselt werden (z.B. mit \gls{httpsLabel}).
+Sobald der bekannt ist, kann eine Kommunikation problemlos mitgehört werden.
+Sprich trotz einem sicheren Schlüssel, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, insofern die nicht andersartig verschlüsselt werden (z.B. mit \gls{httpsLabel}).
 
 
 \subsection{Authentifizierungs-Varianten}
-\gls{wpaLabel} bietet nebst der \gls{pskLabel} Methode (auch als \textit{\gls{wpaLabel}-Personal} bekannt), auch eine \textit{enterprise} Methode an, bei der ein Authentifizierung-Server jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} Schlüssel generiert.
-Dieses \textit{enterprise} Protokoll wird oft in Firmen angewendet, lohnt sich aber für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
+\gls{wpaLabel} bietet nebst der \gls{pskLabel} Methode (die auch als \textit{\gls{wpaLabel}-Personal} bekannt ist), auch eine \textit{enterprise} Methode an.
+Dabei wird ein Authentifizierung-Server verwendet, der jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} generiert.
+Das \textit{enterprise} Protokoll wird oft in Firmen angewendet, lohnt sich jedoch für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
 Deshalb wird in dieser Arbeit auf die \gls{pskLabel} Methode eingegangen.
 
 
 \subsubsection{WPS Standard}
-Der \gls{wpsLabel} Standard entspricht nicht einer eigener Zugriffs Methode, sondern soll das Einrichten von sicheren \gls{pskLabel} beim Client erleichtern.
+Der \gls{wpsLabel} Standard entspricht keiner konkreten Zugriffsmethode, sondern soll das Einrichten von sicheren \gls{pskLabel} clientseitig erleichtern.
 
 Dazu gibt es folgende vier Methoden:\footcite{Wi-Fi_Protected_Setup_-_Wikipedia_the_free_encyclopedia_2015-04-10}
 \begin{itemize}
@@ -37,13 +41,13 @@ Dazu gibt es folgende vier Methoden:\footcite{Wi-Fi_Protected_Setup_-_Wikipedia_
 \end{itemize}
 
 Die PIN Methode gilt als besonders unsicher, da lediglich eine 7-stellige Zahl erraten werden muss (die letzte entfällt, da sie einer Checksumme entspricht).
-Als Gegenmassnahme kann eine automatische zeitliche Sperre nach fehlgeschlagenen Versuchen eingestellt werden.\footcite{viehboeck_wps_2015-04-10}
+Als Gegenmassnahme kann (und soll) eine automatische zeitliche Sperre nach fehlgeschlagenen Versuchen eingestellt werden.\footcite{viehboeck_wps_2015-04-10}
 
 \textit{Push button} und \textit{\gls{nfcLabel}} sind anfällig auf ungewollte Nutzer, wenn der \gls{apLabel} an einem unbewachten Ort steht und sich so jemand selbst authentifizieren kann.
 
 
 \subsection{Schlüsselaustausch}
-Voraussetzung für den gewöhnlichen Schlüsselaustausch ist der Besitz des \gls{pskLabel} (entspricht dem \textit{passphrase}).
+Voraussetzung für den gewöhnlichen Schlüsselaustausch ist der Besitz des \gls{pskLabel}.
 Dieser Schlüssel kann aus 8 bis 63 druckbaren \gls{asciiLabel} Zeichen bestehen.
 
 \subsubsection{Four-Way Handshake}
@@ -58,7 +62,7 @@ Dieser Schlüssel kann aus 8 bis 63 druckbaren \gls{asciiLabel} Zeichen bestehen
 \end{figure}
 Der \textit{Four-Way Handshake} bezeichnet den Zugriff eines Clients auf das Netzwerk.
 Bei einer Verbindung zum Netzwerk wird beidseitig aus dem \gls{pskLabel} und der \gls{ssidLabel} der \gls{pmkLabel} berechnet.
-Dafür wird 4096 der Hash (HMAC-SHA1) des \gls{pskLabel} berechnet. (Dies macht einen \gls{glos:bruteforceLabel}-Angriff so aufwändig.)
+Dafür wird 4096 mal ein \gls{hmacshaLabel} des \gls{pskLabel} berechnet. (Diese Berechnungen machen einen \gls{glos:bruteforceLabel}-Angriff so aufwändig.)
 Der \gls{apLabel} überträgt dem Client eine zufällige Zahl (\textit{A-nonce}), welche der Client mit einer weiteren zufälligen Zahl (\textit{B-nonce}) ergänzt.
 Der \gls{apLabel} berechnet aus den zufälligen Zahlen und den beiden \gls{macLabel}-Adressen einen temporären \gls{ptkLabel}, der pro Session neu generiert wird. Der \gls{ptkLabel} wird zudem auch während einer Session periodisch ausgetauscht.\footcite[][40f.]{WrightCache201503}
 
@@ -68,97 +72,94 @@ Der \gls{apLabel} berechnet aus den zufälligen Zahlen und den beiden \gls{macLa
 %	\caption[WPA: The four-way handshake]{WPA: \textit{The four-way handshake} (Quelle: \fullcite[][151]{WrightCache201503})}
 %\end{figure}
 
-Um den Schlüssel zu knacken werden zusammengefasst folgende Informationen gebraucht:
+Um einen Schlüssel zu knacken werden zusammengefasst folgende Informationen gebraucht:
 \begin{itemize}
 	\item Netzwerk \gls{ssidLabel}
 	\item \textit{A-nonce}
 	\item \textit{B-nonce}
 	\item \gls{macLabel}-Adresse des Clients
 	\item \gls{macLabel}-Adresse des \gls{apLabel}'s
-	\item \gls{micLabel} (entspricht einem Hash der Nutzdaten, um Verfälschung erkennen zu können).
+	\item \gls{micLabel}: entspricht dem Hash der Nutzdaten. Dieser wird als korrekt verschlüsselte Nachricht verwendet. Sprich beim Ausprobieren der möglichen Schlüssel, kommt mit dem gesuchten \gls{pskLabel} derselbe \gls{micLabel}-Wert zustande.
 \end{itemize}
 
 Nebst während dem \textit{Four-Way Handshake}, werden diese Information auch regelmässig wiederholt.
 So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 
-\section{Angriffe (WPA)}
+\section{Angriff auf WPA}
 %p148    \footcite[][148f.]{WrightCache201503}:
 
 \subsection{Angriff Methode}
-Für einen erfolgreichen Angriff muss ein \textit{Four-Way Handshake} vorliegen.
-Dazu müssen die Aktivitäten eines Channel wie in \cref{subsec:wep_crack_tutorial} abgehört und gespeichert werden (z.B. mit \textit{airtport}).
-Während der Aufzeichnung, müssen mindestens 2 Teile des \textit{Four-Way Handshake} aufgezeichnet werden.
+Für einen erfolgreichen Angriff müssen mindestens zwei Teile eines \textit{Four-Way Handshake} vorliegen.
+Dazu müssen die Aktivitäten eines Channel, wie im \cref{subsec:wep_crack_tutorial} wird, abgehört und gespeichert werden (z.B. mit \textit{airport}).
 
-Falls sich keine Clients neu anmelden, können bestehende Clients rausgeschmissen werden
+Falls sich keine Clients neu anmelden, können wie folgt bestehende Clients rausgeschmissen werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
-	-{}-deauth 1 & 64 packages to deauthenticate\\
-	-a	& \gls{apLabel} \gls{macLabel}-Address\\
-	-c	& Client \gls{macLabel}-Address\\
-	en0 & Interface
+	-{}-deauth 1 & löst einmal 64 Deauthentifizierungs-Pakete aus\\
+	-a	& \gls{macLabel}-Adresse des \gls{apLabel}\\
+	-c	& \gls{macLabel}-Adresse des Client\\
+	en0 & zu verwendendes Interface
 \end{tabular}
 
 \subsection{Bruteforce}
 \todo{Bruteforce bei glossary ergänzen}
-Der Rest des Angriffs kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle Keys durchprobiert.
+Der Rest des Angriffs kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle möglichen Schlüssel durchprobiert.
 Es gibt verschiedene Programme die den \gls{glos:bruteforceLabel} durchführen können.
 Einige davon sind im \cref{subsec:wpa_attack_tutorial} dokumentiert.
 
-Die Berechnung ist je nach Schlüssellänge sehr intensiv und wird daher oft statt von der \gls{cpuLabel}, von der \gls{gpuLabel} ausgerechnet.
-Zudem kann Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechner, in der \textit{"`\gls{glos:cloudLabel}"'} berechnet werden.
+Die Berechnung ist je nach Schlüssellänge und bekannten Schlüsselinformationen sehr intensiv und wird daher oft statt von der \gls{cpuLabel}, von der \gls{gpuLabel}, sprich der Grafikkarte, ausgerechnet.
+Ausserdem kann die Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechner, in der \textit{"`\gls{glos:cloudLabel}"'} ausgeführt werden.
+
+Damit nicht alle mögliche Kombinationen, die aus den druckbaren \gls{asciiLabel} Zeichen erstellt werden können, durchprobiert werden müssen, werden oft nur Wörter aus einem definierten Wörterbuch probiert.
+Manche Programme unterstützen auch Passwortmasken, durch die nebst der Schlüssellänge auch pro Zeichenposition eine Auswahl an Zeichen definiert werden kann. So kann die Rechenzeit bei genügend Informationen erheblich reduziert werden.
 
 
-\subsection{Konkreter Angriff auf ein WPA Netzwerk}
+\subsection{Konkreter Angriff auf ein WPA-Netzwerk}
 \label{subsec:wpa_attack_tutorial}
 
-Folgend wurden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
+Folgend werden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
 
-\subsubsection{Daten bereinigen}
-Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir initial mit \textit{Pyrit} alle überflüssigen Daten aus dem \textit{capture}:
+\subsubsection{Datenbereinigung}
+Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir mit \textit{Pyrit} alle überflüssigen Daten aus dem \textit{capture}:
 \begin{lstlisting}[style=lstStyleFramed]
-pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip]
+pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip
 \end{lstlisting}
-Anschliessend wird nach der gewünschten \gls{ssidLabel} gefragt.
+Anschliessend wird man aufgefordert die gewünschte \gls{ssidLabel} auszuwählen.
 Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
-Es werden nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel} behalten.
+Übrig bleiben nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel}.
 
 \subsubsection{Aircrack-ng Bruteforce}
-Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel} Angriff ausgeführt werden:
+Anschliessend kann bereits ein \textit{Aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
-	*.cap & \textit{capture}-Datei mit den Handshakes\\
+	*.cap & \textit{capture}-Datei mit mind. einem Handshake\\
 	-w	& Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
 	-b	& \gls{bssidLabel} des \gls{apLabel}\\
 \end{tabular}
 
 \subsubsection{Pyrit Bruteforce}
-Alternativ kann mit Pyrit ebenfalls ein \gls{glos:bruteforceLabel} Angriff durchgeführt werden:
+Alternativ kann mit \textit{Pyrit} ebenfalls ein \gls{glos:bruteforceLabel}-Angriff durchgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
-	*.cap & \textit{capture}-Datei mit den Handshakes\\
+	-r & \textit{capture}-Datei mit mind. einem Handshake\\
 	-i	& Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
 	-b	& \gls{bssidLabel} des \gls{apLabel}\\
-	attack\_passthrough & die ausgerechneten Hashes sollen nicht zwischengespeichert werden\\
+	attack\_passthrough & definiert, dass ausgerechnete Hashes nicht zwischengespeichert werden\\
 \end{tabular}
 
 
 \subsubsection{Hashcat Bruteforce}
-Um auch noch mit \textit{Hashcat} einen \gls{glos:bruteforceLabel} Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
-
-\begin{framed}
-	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{aircrack-ng} Version "`1.2-rc2"' benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{aircrack-ng} Website beschrieben.\\
-	Auch wenn beim Kompilieren Fehler geworfen werden, befindet sich anschliessend ein \textit{aircrack-ng} im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
-\end{framed}
+Um mit \textit{Hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
 
 \begin{lstlisting}[style=lstStyleFramed]
 ./aircrack-ng -J YHX-02427 yhxXXXX_strip.cap
@@ -166,26 +167,31 @@ Um auch noch mit \textit{Hashcat} einen \gls{glos:bruteforceLabel} Angriff durch
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
 	-J & \gls{ssidLabel} des Netzwerkes\\
-	*.cap & \textit{capture}-Datei mit den Handshakes\\
+	*.cap & \textit{capture}-Datei mit mind. einem Handshake\\
 \end{tabular}
-Nach der Eingabe, werden alle verfügbaren \gls{ssidLabel}'s aufgelistet, von denen die gewünschte ausgewählte werden kann.
-Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. In unserem Fall: \textit{YHX-02427.hccap}.
 
-Nebst dem werden einem \textit{A-nonce (anonce)} , \textit{B-nonce (snonce)}und der \textit{\gls{micLabel} (Key MIC)} angezeigt.
+\begin{framed}
+	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{Aircrack-ng} Version \textit{"`1.2-rc2"'} benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{Aircrack-ng} Website beschrieben.\\
+	Trotzdem, dass beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend ein lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
+\end{framed}
+
+Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. Im konkreten vorliegenden Beispiel also: \textit{YHX-02427.hccap}.
+
+Nebst dem wird der \textit{A-nonce ("`anonce"')} , \textit{B-nonce ("`snonce"')}und der \textit{\gls{micLabel} ("`Key MIC"')} angezeigt.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
-	\caption{Strip capture -- \textit{aircrack-ng}}
+	\caption{Strip capture -- \textit{Aircrack-ng}}
 \end{figure}
 
-Wie bisher können wir erneut einen Wörterbuch Angriff starten:
+Wie bisher können wir erneut einen Wörterbuch-Angriff starten:
 \begin{lstlisting}[style=lstStyleFramed]
 hashcat -m 2500 YHX-02427.hccap wordlist.txt
 \end{lstlisting}
 \begin{tabular}{l l}
 	\textbf{Parameter} & \textbf{Bedeutung}\\
-	-m & Hash Type (2500 = WPA/WPA) (\textit{hashcat -h} um alle anzuzeigen)\\
-	*.hccap & \textit{capture}-Datei mit den Handshakes\\
+	-m & Hash Type (2500 = \gls{wpaLabel}/\gls{wpa2Label}) (\textit{hashcat -h} um alle anzuzeigen)\\
+	*.hccap & \textit{capture}-Datei mit mind. einem Handshake\\
 	*.txt & Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
 \end{tabular}
 
@@ -198,12 +204,14 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 	-m & Hash Type (2500 = WPA/WPA) (\textit{hashcat -h} um alle anzuzeigen)\\
 	-a 3 & \textit{Attack mode} (3 = Bruteforce)\\
 	--pw-min/max & min. und max. Länge des \gls{pskLabel}\\
-	*.hccap & \textit{capture}-Datei mit den Handshakes\\
+	*.hccap & \textit{capture}-Datei mit mind. einem Handshake\\
 	-1 & Pattern mit alphanumerisch (nur Kleinbuchstaben \textit{?l} und Zahlen \textit{?d})\\
-	\[mask\] & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
+	$[mask]$ & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
 \end{tabular}
-Obwohl wir sehr viele Angaben zum Passwort haben und die Länge nicht übermässig gewählt ist, können wir das Knacken vergessen.
-Die Dauer geht weit über 10 Jahre.
+
+Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Länge nicht übermässig lang gewählt ist, werden wir höchstwahrscheinlich den \gls{pskLabel} nicht herausfinden.
+
+% Die Dauer geht weit über 10 Jahre.
 
 %$ 36^{16} = 7.95866111 * 10^{24} $
 
@@ -223,32 +231,70 @@ Die Dauer geht weit über 10 Jahre.
 % (36^4) / 1130 / 60 = 24.773097345
 
 \begin{figure}[H]
-	\begin{minipage}[b]{.45\linewidth}
+%	\begin{minipage}[b]{.45\linewidth}
+	\begin{subfigure}{.45\linewidth}
 	   	\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
 				xlabel={$x$ = Passwortlänge},
-				ylabel={$t$ = Rechenzeit \textbf{Stunden}}
+				ylabel={$t_R$ = \textbf{Stunden}}
 			]
 				\addplot[draw=blue][domain=0:4.8]{(36^x) / 1180 / 60 / 60};
 			\end{axis}
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Stunden}}\label{fig:1a}
-	\end{minipage}%
-	\begin{minipage}[b]{.45\linewidth}
+	\end{subfigure}
+%	\end{minipage}%
+%	\begin{minipage}[b]{.45\linewidth}
+	\begin{subfigure}{.45\linewidth}
 		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
 				xlabel={$x$ = Passwortlänge},
-				ylabel={$t$ = Rechenzeit \textbf{Jahren}}
+				ylabel={$t_R$ = \textbf{Jahre}}
 			]
 				\addplot[draw=blue][domain=0:7.6]{(36^x) / 1180 / 60 / 60 / 24 / 365};
 			\end{axis}
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
-	\end{minipage}
+	\end{subfigure}
+%	\end{minipage}
+	%	
+%	\begin{minipage}[b]{.45\linewidth}
+	\begin{subfigure}{.45\linewidth}
+		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$x$ = Passwortlänge},
+				ylabel={$t_R$ = \textbf{Jahrzehnte}}
+			]
+			\addplot[draw=blue][domain=0:8.6]{(36^x) / 1180 / 60 / 60 / 24 / 365 / 10};
+			\end{axis}
+		\end{tikzpicture}
+		\subcaption{Rechenzeit in \textbf{Jahrzehten}}\label{fig:1c}
+	\end{subfigure}
+%	\end{minipage}%
+%	\begin{minipage}[b]{.45\linewidth}
+	\begin{subfigure}{.45\linewidth}
+		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$x$ = Passwortlänge},
+				ylabel={$t_R$ = \textbf{Jahre \textit{log.}}},
+				ymode = log,
+%				log basis y={10},
+			]
+%			\addplot[draw=blue][domain=0:7.6]{(36^x) / 1180 / 60 / 60 / 24 / 365};
+			\addplot[draw=blue][domain=5:60]{(36^x) / 1180 / 60 / 60 / 24 / 365};
+			\end{axis}
+		\end{tikzpicture}
+		\subcaption{\textbf{logarithmische}\\Rechenzeit in \textbf{Jahren}}\label{fig:1d}
+	\end{subfigure}
+%	\end{minipage}
 	\caption{Rechenzeit in Abhängigkeit der Passwortlänge}\label{fig:1}
 \end{figure}
 
