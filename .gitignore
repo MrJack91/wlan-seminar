@@ -161,6 +161,9 @@ docs/_build/
 # PyBuilder
 target/
 
+#unimportant data
+trash_*
+
 #sensitive data
 practise/data/wordlist.txt
 practise/data/fullCaptureWPA.cap

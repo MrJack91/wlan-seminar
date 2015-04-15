@@ -87,7 +87,6 @@ So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 
 \section{Angriff auf WPA}
-%p148    \footcite[][148f.]{WrightCache201503}:
 
 \subsection{Angriff Methode}
 Für einen erfolgreichen Angriff müssen mindestens zwei Teile eines \textit{Four-Way Handshake} vorliegen.
@@ -107,7 +106,7 @@ aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 
 \subsection{Bruteforce}
 \todo{Bruteforce bei glossary ergänzen}
-Der Rest des Angriffs kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle möglichen Schlüssel durchprobiert.
+Der Rest des Angriffes kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle möglichen Schlüssel durchprobiert.
 Es gibt verschiedene Programme die den \gls{glos:bruteforceLabel} durchführen können.
 Einige davon sind im \cref{subsec:wpa_attack_tutorial} dokumentiert.
 
@@ -121,10 +120,12 @@ Manche Programme unterstützen auch Passwortmasken, durch die nebst der Schlüss
 \subsection{Konkreter Angriff auf ein WPA-Netzwerk}
 \label{subsec:wpa_attack_tutorial}
 
-Folgend werden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{Aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{Pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{Hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
+Folgend werden drei verschiedene Programme (\textit{crack utilities}) verwendet: \textit{aircrack-ng}\footcite{Aircrack-ng_2015-04-06}, \textit{pyrit}\footcite{pyrit_Google_Project_Hosting_2015-04-13} und \textit{hashcat}\footcite{hashcat_advanced_password_recovery_2015-04-13}.
+
+In diesem \cref{subsec:wpa_attack_tutorial} basieren viele Inhalte auf dem Buch "`Hacking Exposed Wireless"'.\footcite[][148f.]{WrightCache201503}
 
 \subsubsection{Datenbereinigung}
-Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir mit \textit{Pyrit} alle überflüssigen Daten aus dem \textit{capture}:
+Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfernen wir mit \textit{pyrit} alle überflüssigen Daten aus dem \textit{capture}:
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r yhxXXXX.cap -o yhxXXXX_strip.cap strip
 \end{lstlisting}
@@ -133,7 +134,7 @@ Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
 Übrig bleiben nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel}.
 
 \subsubsection{Aircrack-ng Bruteforce}
-Anschliessend kann bereits ein \textit{Aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
+Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \end{lstlisting}
@@ -145,7 +146,7 @@ aircrack-ng yhxXXXX_strip.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 \end{tabular}
 
 \subsubsection{Pyrit Bruteforce}
-Alternativ kann mit \textit{Pyrit} ebenfalls ein \gls{glos:bruteforceLabel}-Angriff durchgeführt werden:
+Alternativ kann mit \textit{pyrit} ebenfalls ein \gls{glos:bruteforceLabel}-Angriff durchgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
 \end{lstlisting}
@@ -159,7 +160,7 @@ pyrit -r yhxXXXX_strip.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrou
 
 
 \subsubsection{Hashcat Bruteforce}
-Um mit \textit{Hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
+Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
 
 \begin{lstlisting}[style=lstStyleFramed]
 ./aircrack-ng -J YHX-02427 yhxXXXX_strip.cap
@@ -171,7 +172,7 @@ Um mit \textit{Hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen,
 \end{tabular}
 
 \begin{framed}
-	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{Aircrack-ng} Version \textit{"`1.2-rc2"'} benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{Aircrack-ng} Website beschrieben.\\
+	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{aircrack-ng} Version \textit{"`1.2-rc2"'} benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{aircrack-ng} Website beschrieben.\\
 	Trotzdem, dass beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend ein lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
 \end{framed}
 
@@ -181,7 +182,7 @@ Nebst dem wird der \textit{A-nonce ("`anonce"')} , \textit{B-nonce ("`snonce"')}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
-	\caption{Strip capture -- \textit{Aircrack-ng}}
+	\caption{Strip capture -- \textit{aircrack-ng}}
 \end{figure}
 
 Wie bisher können wir erneut einen Wörterbuch-Angriff starten:
@@ -195,7 +196,7 @@ hashcat -m 2500 YHX-02427.hccap wordlist.txt
 	*.txt & Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
 \end{tabular}
 
-Zudem kann \textit{Hashcat} auch Passwörter mit Platzhalter knacken:\footcite{mask_attack_hashcat_wiki_2015-04-13}
+Zudem kann \textit{hashcat} auch Passwörter mit Platzhalter knacken:\footcite{mask_attack_hashcat_wiki_2015-04-13}
 \begin{lstlisting}[style=lstStyleFramed]
 hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1?1?1?1-?1?1?1?1-?1?1?1?1
 \end{lstlisting}
@@ -231,8 +232,7 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 % (36^4) / 1130 / 60 = 24.773097345
 
 \begin{figure}[H]
-%	\begin{minipage}[b]{.45\linewidth}
-	\begin{subfigure}{.45\linewidth}
+	\begin{minipage}[b]{.45\linewidth}
 	   	\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
 		\centering
 		\begin{tikzpicture}
@@ -244,10 +244,8 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 			\end{axis}
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Stunden}}\label{fig:1a}
-	\end{subfigure}
-%	\end{minipage}%
-%	\begin{minipage}[b]{.45\linewidth}
-	\begin{subfigure}{.45\linewidth}
+	\end{minipage}%
+	\begin{minipage}[b]{.45\linewidth}
 		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
 		\centering
 		\begin{tikzpicture}
@@ -259,26 +257,12 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 			\end{axis}
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
-	\end{subfigure}
-%	\end{minipage}
-	%	
-%	\begin{minipage}[b]{.45\linewidth}
-	\begin{subfigure}{.45\linewidth}
-		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
-		\centering
-		\begin{tikzpicture}
-			\begin{axis}[
-				xlabel={$x$ = Passwortlänge},
-				ylabel={$t_R$ = \textbf{Jahrzehnte}}
-			]
-			\addplot[draw=blue][domain=0:8.6]{(36^x) / 1180 / 60 / 60 / 24 / 365 / 10};
-			\end{axis}
-		\end{tikzpicture}
-		\subcaption{Rechenzeit in \textbf{Jahrzehten}}\label{fig:1c}
-	\end{subfigure}
-%	\end{minipage}%
-%	\begin{minipage}[b]{.45\linewidth}
-	\begin{subfigure}{.45\linewidth}
+	\end{minipage}
+	\caption{Rechenzeit \textbf{linear} in Abhängigkeit der Passwortlänge}\label{fig:1}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{minipage}[b]{.65\linewidth}
 		\pgfplotsset{width=1.0\textwidth, height=0.7\textwidth}
 		\centering
 		\begin{tikzpicture}
@@ -286,16 +270,12 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 				xlabel={$x$ = Passwortlänge},
 				ylabel={$t_R$ = \textbf{Jahre \textit{log.}}},
 				ymode = log,
-%				log basis y={10},
 			]
-%			\addplot[draw=blue][domain=0:7.6]{(36^x) / 1180 / 60 / 60 / 24 / 365};
-			\addplot[draw=blue][domain=5:60]{(36^x) / 1180 / 60 / 60 / 24 / 365};
+				\addplot[draw=blue][domain=5:60]{(36^x) / 1180 / 60 / 60 / 24 / 365};
 			\end{axis}
 		\end{tikzpicture}
-		\subcaption{\textbf{logarithmische}\\Rechenzeit in \textbf{Jahren}}\label{fig:1d}
-	\end{subfigure}
-%	\end{minipage}
-	\caption{Rechenzeit in Abhängigkeit der Passwortlänge}\label{fig:1}
+	\end{minipage}
+	\caption{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Passwortlänge in \textbf{Jahren}}\label{fig:}
 \end{figure}
 
 
@@ -311,6 +291,3 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 %
 %\todo{Performance Tests -> wörterbuchangriff erweitern}
 %\todo{Genaue Versionen der Programme}
-
-
-
