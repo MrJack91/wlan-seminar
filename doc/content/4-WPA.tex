@@ -58,7 +58,7 @@ Dieser Schlüssel kann aus 8 bis 63 druckbaren \gls{asciiLabel} Zeichen bestehen
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{images/wpa/four-way-handshake.png}
-	\caption[WPA: The four-way handshake]{WPA: \textit{The four-way handshake} (Quelle: \cite[][151]{WrightCache201503})}
+	\caption[The four-way handshake -- WPA]{\textit{The four-way handshake} -- \gls{wpaLabel} (Quelle: \cite[][151]{WrightCache201503})}
 \end{figure}
 Der \textit{Four-Way Handshake} bezeichnet den Zugriff eines Clients auf das Netzwerk.
 Bei einer Verbindung zum Netzwerk wird beidseitig aus dem \gls{pskLabel} und der \gls{ssidLabel} der \gls{pmkLabel} berechnet.
@@ -218,7 +218,7 @@ Nebst dem wird der \textit{A-nonce ("`anonce"')}, \textit{B-nonce ("`snonce"')} 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
-	\caption{strip capture -- \textit{aircrack-ng}}
+	\caption{aircrack-ng: strip capture (Datenbereinigung) -- Terminalausgabe}
 \end{figure}
 
 Der Wörterbuch-Angriff wird gestartet:
@@ -250,7 +250,7 @@ Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils der Status abgefrag
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/hashcat_bruteforce_pattern.png}
-	\caption{\textit{hashcat} \gls{glos:bruteforceLabel} mit Passwortmaske -- \textit{hashcat}}\label{fig:hashcat_bruteforce_pattern}
+	\caption[hashcat: Bruteforce mit Passwortmaske -- Terminalausgabe]{hashcat: \gls{glos:bruteforceLabel} mit Passwortmaske -- Terminalausgabe}\label{fig:hashcat_bruteforce_pattern}
 	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angabe für kleinere Passwörter korrekt ist.\\
 	Die Anzahl der zu testenden Wörter ist um den Faktor $10^5$ grösser.
 	Anstatt die gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
@@ -316,7 +316,7 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
 	\end{minipage}
-	\caption{Rechenzeit \textbf{linear} in Abhängigkeit der Schlüssellänge}\label{fig:1}
+	\caption[Rechenzeit linear in Abhängigkeit der Schlüssellänge]{Rechenzeit \textbf{linear} in Abhängigkeit der Schlüssellänge}\label{fig:1}
 	\label{fig:wpa_attack_linear}
 \end{figure}
 
@@ -334,7 +334,7 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 			\end{axis}
 		\end{tikzpicture}
 	\end{minipage}
-	\caption{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Schlüssellänge (in \textbf{Jahren})}\label{fig:}
+	\caption[Rechenzeit logarithmisch in Abhängigkeit der Schlüssellänge]{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Schlüssellänge (in \textbf{Jahren})}\label{fig:}
 	\label{fig:wpa_attack_log}
 \end{figure}
 
