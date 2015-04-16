@@ -15,7 +15,7 @@ Da \gls{wpaLabel} und \gls{wpa2Label} sehr viele Ähnlichkeiten aufweisen, wird 
 
 Ein erfolgreicher Angriff kann bisher nur via \gls{glos:bruteforceLabel}- und Wörterbuch-Angriff erfolgen, was relativ unmöglich ist, vorausgesetzt es wird ein \textit{sicherer} \gls{pskLabel} verwendet.
 
-\todo{Box mit sicherem Passwort:  (mind. 16 zufälligen alphanumerischen Zeichen)}
+%\todo{Box mit sicherem Passwort:  (mind. 16 zufälligen alphanumerischen Zeichen)}
 
 Die ganze Sicherheit basiert auf dem \gls{pskLabel}.
 Sobald der bekannt ist, kann eine Kommunikation problemlos mitgehört werden.
@@ -105,8 +105,7 @@ aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 \end{tabular}
 
 \subsection{Bruteforce}
-\todo{Bruteforce bei glossary ergänzen}
-Der Rest des Angriffes kann offline erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle möglichen Schlüssel durchprobiert.
+Der Rest des Angriffes kann offline per \gls{glos:bruteforceLabel} erfolgen. Durch Ausprobieren wird nach einem gültigen \gls{pskLabel} gesucht, der einen gültigen \gls{micLabel}-Hash berechnet. Dies wird für alle möglichen Schlüssel durchprobiert.
 Es gibt verschiedene Programme die den \gls{glos:bruteforceLabel} durchführen können.
 Einige davon sind im \cref{subsec:wpa_attack_tutorial} dokumentiert.
 
