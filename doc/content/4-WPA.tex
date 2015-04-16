@@ -127,7 +127,7 @@ In diesem \cref{subsec:wpa_attack_tutorial} basieren viele Inhalte auf dem Buch 
 Folgend wird das \gls{wpa2Label}-Testnetz mit der \gls{ssidLabel} \textit{YHX-02427} als Angriffsziel verwendet.
 Das Netz wird durch den aktuellen Swisscom-Router \textit{Centro grande} zur Verfügung gestellt. \footcite{Centro_grande_Analog_Standard_-_WLAN_Router_Swisscom_2015-04-15}
 
-Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entsprechen dem Auslieferungszustandes.
+Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entsprechen dem Auslieferungszustand.
 Darum sind folgende Eigenschaften des \gls{pskLabel}'s im Vorhinein bekannt:
 \begin{itemize}
 	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`-"' (Minus). Sprich die Länge beträgt total 19 Zeichen, wovon drei bereits bekannt sind (die Minuszeichen).
@@ -209,19 +209,19 @@ Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen,
 
 \begin{framed}
 	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{aircrack-ng} Version \textit{"`1.2-rc2"'} benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{aircrack-ng} Website beschrieben.\\
-	Trotzdem, dass beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend ein lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
+	Trotzdem, dass beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend eine lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
 \end{framed}
 
 Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. Im konkreten vorliegenden Beispiel also: \textit{YHX-02427.hccap}.
 
-Nebst dem wird der \textit{A-nonce ("`anonce"')} , \textit{B-nonce ("`snonce"')}und der \textit{\gls{micLabel} ("`Key MIC"')} angezeigt.
+Nebst dem wird der \textit{A-nonce ("`anonce"')}, \textit{B-nonce ("`snonce"')} und der \textit{\gls{micLabel} ("`Key MIC"')} angezeigt.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
-	\caption{Strip capture -- \textit{aircrack-ng}}
+	\caption{strip capture -- \textit{aircrack-ng}}
 \end{figure}
 
-Wie bisher können wir erneut einen Wörterbuch-Angriff starten:
+Der Wörterbuch-Angriff wird gestartet:
 \begin{lstlisting}[style=lstStyleFramed]
 hashcat -m 2500 YHX-02427.hccap wordlist.txt
 \end{lstlisting}
@@ -246,13 +246,13 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 	$[mask]$ & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
 \end{tabular}
 
-Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils eine Statusmeldung erzeugt werden)
+Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils der Status abgefragt werden)
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/hashcat_bruteforce_pattern.png}
-	\caption{\textit{hashcat} \gls{glos:bruteforceLabel} mit Passwortmaske -- \textit{aircrack-ng}}\label{fig:hashcat_bruteforce_pattern}
-	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angaben für kleinere Passwörter korrekt sind.\\
-	Die korrekte Anzahl zu testende Worte wäre um den Faktor $10^5$ grösser.
+	\caption{\textit{hashcat} \gls{glos:bruteforceLabel} mit Passwortmaske -- \textit{hashcat}}\label{fig:hashcat_bruteforce_pattern}
+	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angabe für kleinere Passwörter korrekt ist.\\
+	Die Anzahl der zu testenden Wörter ist um den Faktor $10^5$ grösser.
 	Anstatt die gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
 \end{figure}
 
@@ -271,7 +271,7 @@ Basierend auf den bekannten Passwortinformationen aus \cref{subsubsec:wpa_test_e
 	\end{split}
 \end{equation}
 
-Aus \cref{fig:hashcat_bruteforce_pattern} ist die Geschwindigkeit $v_{speed} = 1.18k\,hashes/sec$ ersichtlich.
+In \cref{fig:hashcat_bruteforce_pattern} ist die Geschwindigkeit $v_{speed} = 1.18k\,hashes/sec$ ersichtlich.
 (Falls alle anderen Programme auf dem System geschlossen werden, steigt die Geschwindigkeit leicht auf $v_{speed} = 1.23k\,hashes/sec$ an.
 Für folgende Berechnungen wurde die gewöhnliche Geschwindigkeit $v_{speed} = 1.18k\,hashes/sec$ verwendet.)
 
@@ -284,9 +284,9 @@ Daraus kann die Dauer des Angriffes wie folgt berechnet werden:
 	\end{split}
 \end{equation}
 
-\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Passwortes. Würde man alle Möglichkeiten ausprobieren dauert der Angriff 213 Billionen Jahre.
+\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Schlüssels. Würde man alle Möglichkeiten ausprobieren dauert der Angriff 213 Billionen Jahre.
 
-Bekannterweise hängt die Rechenzeit stark von der Schlüssellänge ab.
+Bekannterweise hängt die Rechenzeit $t_R$ stark von der Schlüssellänge ab.
 Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschaulichen jene Abhängigkeit, basierend auf den Kriterien des zu knackenden Schlüssels.
 
 \begin{figure}[H]
@@ -316,7 +316,7 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 		\end{tikzpicture}
 		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
 	\end{minipage}
-	\caption{Rechenzeit \textbf{linear} in Abhängigkeit der Passwortlänge}\label{fig:1}
+	\caption{Rechenzeit \textbf{linear} in Abhängigkeit der Schlüssellänge}\label{fig:1}
 	\label{fig:wpa_attack_linear}
 \end{figure}
 
@@ -334,22 +334,22 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 			\end{axis}
 		\end{tikzpicture}
 	\end{minipage}
-	\caption{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Passwortlänge in \textbf{Jahren}}\label{fig:}
+	\caption{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Schlüssellänge (in \textbf{Jahren})}\label{fig:}
 	\label{fig:wpa_attack_log}
 \end{figure}
 
 
 \subsubsection{Verbesserungsmöglichkeiten und Beschleunigungen}
-Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man abhängig der Grafikkarte 40'000 bis 60'000 hashes/sec. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
+Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man abhängig der Grafikkarte $40k\,hashes/sec$ bis $60k\,hashes/sec$. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
 
-Da das Aufwändige des Angriffes die Berechnung der Hashes ist, können alternativ bereits ausgerechnete \glspl{glos:rainbowTableLabel} verwendet werden.
-Abhängig der Hardware können so 200'000'000\,hashes/sec getestet werden. Dies wiederum entspricht gegenüber dem traditionellen \gls{cpuLabel} Angriff eine 200'000-fache Beschleunigung.\footcite[][160]{WrightCache201503}
+Da der Aufwand des Angriffes auf die Berechnungen der Hashes zurückzuführen ist, kann alternativ eine bereits ausgerechnete \gls{glos:rainbowTableLabel} verwendet werden.
+Abhängig der Hardware können so $200'000k\,hashes/sec$ getestet werden. Dies wiederum entspricht gegenüber dem traditionellen \gls{cpuLabel} Angriff eine 200'000-fache Beschleunigung.\footcite[][160]{WrightCache201503}
 %176,830,746 PMK/second
-Die Hashes von \gls{wpaLabel} beinhalten jedoch als \gls{glos:saltLabel} die \gls{ssidLabel}, sprich die \glspl{glos:rainbowTableLabel} können nur für Netze mit der selben \gls{ssidLabel} verwendet werden, was die Nutzung erheblich einschränkt.
+Die Hashes von \gls{wpaLabel} beinhalten jedoch als \gls{glos:saltLabel} die \gls{ssidLabel}, sprich die \glspl{glos:rainbowTableLabel} können nur für Netze mit der selben \gls{ssidLabel} verwendet werden, was die Verwendbarkeit erheblich einschränkt.
 
 
 \subsubsection{Fazit des Angriffes}
-Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von bis zu 50-facher (oder sogar 200'000-facher mit \glspl{glos:rainbowTableLabel}) die durchschnittliche Knackzeit des Swisscom Router \gls{pskLabel}'s via \gls{glos:bruteforceLabel} nicht während Lebenszeiten abgeschlossen werden kann.
+Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von bis zu 50-facher (oder sogar 200'000-facher mit \glspl{glos:rainbowTableLabel}) die durchschnittliche Knackzeit des Swisscom Router \gls{pskLabel}'s via \gls{glos:bruteforceLabel} nicht während Lebzeiten abgeschlossen werden kann.
 
 Wenn wir die benötige Rechenzeit mit der durchschnittlichen Einsatzdauer eines Routers vergleichen, erkennt man, dass die \gls{pskLabel}-Länge mit mehr als genügender Sicherheit gewählt wurde.
 
