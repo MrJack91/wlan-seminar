@@ -107,9 +107,34 @@
 	description={\textit{Cloud} bietet dem Benutzer Software oder Hardware zur Benutzung an, ohne das jener im Detail weiss, auf was für Infrastruktur er arbeitet. Meist stehen Komponenten im Internet bereit, so dass weltweiter Zugriff ermöglicht wird.}
 }
 
-\newglossaryentry{glos:bruteforceLabel}{name=Bruteforce,
-	description={Bruteforce (engl. \textit{brute force}, \textit{rohe Gewalt}) definiert das ausprobieren möglicher Kombinationen. Bei der Kryptografie ist dies eine sichere, jedoch ineffiziente Lösung um ein Passwort herauszufinden.}
+\newglossaryentry{glos:bruteforceLabel}{
+	name=Bruteforce,
+	description={
+		Bruteforce (engl. \textit{brute force}, \textit{rohe Gewalt}) definiert das ausprobieren möglicher Kombinationen. Bei der Kryptografie ist dies eine sichere, jedoch ineffiziente Lösung um ein Passwort herauszufinden.
+		%todo
+		}
 }
+
+\newglossaryentry{glos:interfaceLabel}{
+	name=Interface,
+	description={
+		%todo
+		placeholder text
+	}
+}
+
+\newglossaryentry{glos:rainbowTableLabel}{
+	name={rainbow table},
+	plural={rainbow tables},
+	description={\textit{rainbow tables} beinhalten fertig berechnete Hashes um Passwörter schneller knacken zu können. Um die Nutzung der \textit{rainbow tables} einzuschränken, wird oft ein \gls{glos:saltLabel} in den Hash eingerechnet, so dass allgemein verfügbare \textit{rainbow tables} nicht verwendet werden können.}
+}
+
+\newglossaryentry{glos:saltLabel}{
+	name={salt},
+	description={Ein \textit{salt} beinhaltet zufälligen Daten und wird zum Hash mitgerechnet. So können bereits vorhandene \glspl{glos:rainbowTableLabel} nicht verwendet werden, da die höchstwahrscheinlich nicht mit dem selben \textit{salt} berechnet wurden.}
+}
+
+
 
 
 

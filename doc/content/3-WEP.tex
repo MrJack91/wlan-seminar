@@ -27,22 +27,22 @@ Die notwendigen Schritten des Angriffes werden kurz erl채utert:\footcite[][129f.
 \begin{enumerate}
 	\item Daten eines Channels aufzeichnen\\
 	\texttt{airodump-ng} (ergibt eine \textit{*.cap} Datei)
-	
+
 	\item erfolgreiche Verbindung vort채uschen\\
 	\texttt{aireplay-ng  -{}-fakeauth}
-	
+
 	\item \textit{Fragmentation-} oder \textit{ChopChop-Angriff}\\
 	\texttt{(aireplay-ng -{}-fragment)} oder \texttt{(aireplay-ng -{}-chopchop)}
-	
+
 	\item Eigenes broadcast \gls{arpLabel} Paket bauen\\
 	\texttt{packetforge-ng -{}-arp}
-	
+
 	\item \gls{arpLabel} an \gls{apLabel} senden (inject)\\
 	\texttt{aireplay-ng -{}-interactive}
-	
+
 	\item Aufzeichnung von Schritt 1 knacken\\
 	\texttt{aircrack-ng}
-	
+
 \end{enumerate}
 
 \begin{framed}
@@ -57,7 +57,7 @@ Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgef�
 
 \subsection{Setup}
 \subsubsection{Hardware}
-Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein 채ltere Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen Passwort eingerichtet.
+Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein 채ltere Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen \gls{pskLabel} eingerichtet.
 
 \subsection{Ausf체hrung}
 \label{subsec:wep_crack_tutorial}

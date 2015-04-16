@@ -101,7 +101,7 @@ aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 	-{}-deauth 1 & löst einmal 64 Deauthentifizierungs-Pakete aus\\
 	-a	& \gls{macLabel}-Adresse des \gls{apLabel}\\
 	-c	& \gls{macLabel}-Adresse des Client\\
-	en0 & zu verwendendes Interface
+	en0 & zu verwendendes \gls{glos:interfaceLabel}
 \end{tabular}
 
 \subsection{Bruteforce}
@@ -123,6 +123,7 @@ Manche Programme unterstützen auch Passwortmasken, durch die nebst der Schlüss
 In diesem \cref{subsec:wpa_attack_tutorial} basieren viele Inhalte auf dem Buch "`Hacking Exposed Wireless"'.\footcite[][148f.]{WrightCache201503}
 
 \subsubsection{Testumgebung}
+\label{subsubsec:wpa_test_environment}
 
 Folgend wird das \gls{wpa2Label}-Testnetz mit der \gls{ssidLabel} \textit{YHX-02427} als Angriffsziel verwendet.
 Das Netz wird durch den aktuellen Swisscom-Router \textit{Centro grande} zur Verfügung gestellt. \footcite{Centro_grande_Analog_Standard_-_WLAN_Router_Swisscom_2015-04-15}
@@ -130,8 +131,8 @@ Das Netz wird durch den aktuellen Swisscom-Router \textit{Centro grande} zur Ver
 Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entsprechen dem Auslieferungszustandes.
 Darum sind folgende Eigenschaften des \gls{pskLabel}'s im Vorhinein bekannt:
 \begin{itemize}
-	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`--"' (Minus).
-	\item Eine vierstellige Zeichenfolge besteht ausschliesslich aus Kleinbuchstaben und Zahlen, ansonsten kommen keine andere Zeichen darin vor.
+	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`-"' (Minus). Sprich die Länge beträgt total 19 Zeichen, wovon drei bereits bekannt sind (die Minuszeichen).
+	\item Eine vierstellige Zeichenfolge besteht ausschliesslich aus Kleinbuchstaben und Zahlen.
 \end{itemize}
 
 Es werden drei verschiedene Programme (\textit{crack utilities}) verwendet:
@@ -240,32 +241,54 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 	\textbf{Parameter} & \textbf{Bedeutung}\\
 	-m & Hash Type (2500 = WPA/WPA) (\textit{hashcat -h} um alle anzuzeigen)\\
 	-a 3 & \textit{Attack mode} (3 = Bruteforce)\\
-	--pw-min/max & min. und max. Länge des \gls{pskLabel}\\
+	-{}-pw-min/max & min. und max. Länge des \gls{pskLabel}\\
 	*.hccap & \textit{capture}-Datei mit mind. einem Handshake\\
 	-1 & Pattern mit alphanumerisch (nur Kleinbuchstaben \textit{?l} und Zahlen \textit{?d})\\
 	$[mask]$ & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
 \end{tabular}
 
+Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils eine Statusmeldung erzeugt werden)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/wpa/hashcat_bruteforce_pattern.png}
+	\caption{\textit{hashcat} \gls{glos:bruteforceLabel} mit Passwortmaske -- \textit{aircrack-ng}}\label{fig:hashcat_bruteforce_pattern}
+	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angaben für kleinere Passwörter korrekt sind.\\
+	Die korrekte Anzahl zu testende Worte wäre um den Faktor $10^5$ grösser.
+	Anstatt die gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
+\end{figure}
+
 Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Länge nicht übermässig lang gewählt ist, werden wir höchstwahrscheinlich den \gls{pskLabel} nicht herausfinden.
 
-% Die Dauer geht weit über 10 Jahre.
 
-%$ 36^{16} = 7.95866111 * 10^{24} $
+\subsubsection{Sicherheit und Rechenzeit}
 
-% (36^16) / 1180 / 60 / 60 / 24 / 365
-% 2.13870752767523 * 10^{15}
-% 1.18k words/sec
+Basierend auf den bekannten Passwortinformationen aus \cref{subsubsec:wpa_test_environment} kommen für jedes der 16 unbekannten Zeichen 26 Buchstaben oder 10 Zahlen zur Auswahl.
 
-%If no other windows:
-%1.23k
-%Kill all other services
-%1.23k
+\begin{equation}
+	\begin{split}
+	\label{eqn:wpa_attack_key_possibelities}
+	P_{Anzahl\,Möglichkeiten} &= n_{Anzahl\,Zeichen}\,^{p_{Anzahl\,Positionen}}\\
+	&= 36^{16} = 7.9587 * 10^{24}
+	\end{split}
+\end{equation}
 
-% normale nutzung der cpu
-% hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d 99nl-uk1v-wrke-?1?1?1?1
-% 1.13k words
-% 73308/1679616 (4.36%) -> 23.5 min
-% (36^4) / 1130 / 60 = 24.773097345
+Aus \cref{fig:hashcat_bruteforce_pattern} ist die Geschwindigkeit $v_{speed} = 1.18k\,hashes/sec$ ersichtlich.
+(Falls alle anderen Programme auf dem System geschlossen werden, steigt die Geschwindigkeit leicht auf $v_{speed} = 1.23k\,hashes/sec$ an.
+Für folgende Berechnungen wurde die gewöhnliche Geschwindigkeit $v_{speed} = 1.18k\,hashes/sec$ verwendet.)
+
+Daraus kann die Dauer des Angriffes wie folgt berechnet werden:
+\begin{equation}
+	\begin{split}
+	\label{eqn:wpa_attack_duration_hours}
+	T_{years} &= P_{Anzahl\,Möglichkeiten} / v_{speed} / t_{minLen} / t_{hourLen} / t_{dayLen} / t_{yearLen}\\
+	&= 36^{16} / 1180 / 60 / 60 / 24 / 365 = 2.1387 * 10^{14}\,Jahre
+	\end{split}
+\end{equation}
+
+\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Passwortes. Würde man alle Möglichkeiten ausprobieren dauert der Angriff 213 Billionen Jahre.
+
+Bekannterweise hängt die Rechenzeit stark von der Schlüssellänge ab.
+Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschaulichen jene Abhängigkeit, basierend auf den Kriterien des zu knackenden Schlüssels.
 
 \begin{figure}[H]
 	\begin{minipage}[b]{.45\linewidth}
@@ -295,6 +318,7 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 		\subcaption{Rechenzeit in \textbf{Jahren}}\label{fig:1b}
 	\end{minipage}
 	\caption{Rechenzeit \textbf{linear} in Abhängigkeit der Passwortlänge}\label{fig:1}
+	\label{fig:wpa_attack_linear}
 \end{figure}
 
 \begin{figure}[H]
@@ -312,11 +336,22 @@ Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Läng
 		\end{tikzpicture}
 	\end{minipage}
 	\caption{Rechenzeit \textbf{logarithmisch} in Abhängigkeit der Passwortlänge in \textbf{Jahren}}\label{fig:}
+	\label{fig:wpa_attack_log}
 \end{figure}
 
 
+\subsubsection{Verbesserungsmöglichkeiten und Beschleunigungen}
+Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man abhängig der Grafikkarte 40'000 bis 60'000 hashes/sec. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
 
-%\todo{IMAGE: hashcat_bruteforce_pattern hinzufügen}
+Da das Aufwändige des Angriffes die Berechnung der Hashes ist, können alternativ bereits ausgerechnete \glspl{glos:rainbowTableLabel} verwendet werden.
+Abhängig der Hardware können so 200'000'000\,hashes/sec getestet werden. Dies wiederum entspricht gegenüber dem traditionellen \gls{cpuLabel} Angriff eine 200'000-fache Beschleunigung.\footcite[][160]{WrightCache201503}
+%176,830,746 PMK/second
+Die Hashes von \gls{wpaLabel} beinhalten jedoch als \gls{glos:saltLabel} die \gls{ssidLabel}, sprich die \glspl{glos:rainbowTableLabel} können nur für Netze mit der selben \gls{ssidLabel} verwendet werden, was die Nutzung erheblich einschränkt.
 
-%\todo{Performance Tests -> wörterbuchangriff erweitern}
-%\todo{Genaue Versionen der Programme}
+
+\subsubsection{Fazit des Angriffes}
+Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von bis zu 50-facher (oder sogar 200'000-facher mit \glspl{glos:rainbowTableLabel}) die durchschnittliche Knackzeit des Swisscom Router \gls{pskLabel}'s via \gls{glos:bruteforceLabel} nicht während Lebenszeiten abgeschlossen werden kann.
+
+Wenn wir die benötige Rechenzeit mit der durchschnittlichen Einsatzdauer eines Routers vergleichen, erkennt man, dass die \gls{pskLabel}-Länge mit mehr als genügender Sicherheit gewählt wurde.
+
+Die Sicherheit gilt solange kein anderer Weg als ein \gls{glos:bruteforceLabel}-Angriff bekannt ist.
