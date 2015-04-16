@@ -134,6 +134,9 @@ Darum sind folgende Eigenschaften des \gls{pskLabel}'s im Vorhinein bekannt:
 	\item Eine vierstellige Zeichenfolge besteht ausschliesslich aus Kleinbuchstaben und Zahlen.
 \end{itemize}
 
+Für die Wörterbuch-Angriffe wird jeweils ein Wörterbuch verwendet, dass unter anderem auch den korrekten Schlüssel beinhaltet.
+Wörterbuch-Angriffe eignen sich für zufällig generierte Schlüssel nicht, da keine bekannte Wörter verwendet werden, werden aber hier exemplarisch trotzdem verwendet.
+
 Es werden drei verschiedene Programme (\textit{crack utilities}) verwendet:
 %\footcite{Aircrack-ng_2015-04-06}
 %\footcite{pyrit_Google_Project_Hosting_2015-04-13}
@@ -169,7 +172,7 @@ Anschliessend wird man aufgefordert die gewünschte \gls{ssidLabel} auszuwählen
 Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
 Übrig bleiben nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel}.
 
-\subsubsection{Aircrack-ng Bruteforce}
+\subsubsection{Aircrack-ng: Bruteforce mit Wörterbuch}
 Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aircrack-ng YHX-02427.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
@@ -181,7 +184,10 @@ aircrack-ng YHX-02427.cap -w wordlist.txt -b A4:52:6F:8A:9F:01
 	-b	& \gls{bssidLabel} des \gls{apLabel}\\
 \end{tabular}
 
-\subsubsection{Pyrit Bruteforce}
+Die Geschwindigkeit auf dem Testsystem beträgt $1.542k\,hashes/sec$.
+%1542.70 k/s
+
+\subsubsection{Pyrit: Bruteforce mit Wörterbuch}
 Alternativ kann mit \textit{pyrit} ebenfalls ein \gls{glos:bruteforceLabel}-Angriff durchgeführt werden:
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r YHX-02427.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
@@ -194,8 +200,10 @@ pyrit -r YHX-02427.cap -i wordlist.txt -b a4:52:6f:8a:9f:01 attack_passthrough
 	attack\_passthrough & definiert, dass ausgerechnete Hashes nicht zwischengespeichert werden\\
 \end{tabular}
 
+Die Geschwindigkeit auf dem Testsystem beträgt $1.523k\,hashes/sec$.
+% 1523 PMKs per second
 
-\subsubsection{Hashcat Bruteforce}
+\subsubsection{Hashcat: Bruteforce mit Wörterbuch}
 Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen, muss die \textit{.cap} Datei in eine \textit{.hccap} Datei umgewandelt werden. Dies kann mit \textit{aircrack-ng} erledigt werden.
 
 \begin{lstlisting}[style=lstStyleFramed]
@@ -232,6 +240,10 @@ hashcat -m 2500 YHX-02427.hccap wordlist.txt
 	*.txt & Textdatei mit allen zu probierenden \gls{pskLabel}'s (einer pro Zeile)\\
 \end{tabular}
 
+Die Geschwindigkeit auf dem Testsystem beträgt $1.17k\,hashes/sec$.
+%1.17k words
+
+\subsubsection{Hashcat: Bruteforce mit Passwortmaske}
 Zudem kann \textit{hashcat} auch Passwörter mit Platzhalter knacken:\footcite{mask_attack_hashcat_wiki_2015-04-13}
 \begin{lstlisting}[style=lstStyleFramed]
 hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1?1?1?1-?1?1?1?1-?1?1?1?1
@@ -245,6 +257,8 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 	-1 & Pattern mit alphanumerisch (nur Kleinbuchstaben \textit{?l} und Zahlen \textit{?d})\\
 	$[mask]$ & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
 \end{tabular}
+
+Die Geschwindigkeit auf dem Testsystem beträgt $1.18k\,hashes/sec$.
 
 Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils der Status abgefragt werden)
 \begin{figure}[H]
@@ -354,3 +368,7 @@ Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von
 Wenn wir die benötige Rechenzeit mit der durchschnittlichen Einsatzdauer eines Routers vergleichen, erkennt man, dass die \gls{pskLabel}-Länge mit mehr als genügender Sicherheit gewählt wurde.
 
 Die Sicherheit gilt solange kein anderer Weg als ein \gls{glos:bruteforceLabel}-Angriff bekannt ist.
+
+Bei den verwendeten Programmen fällt auf, dass \textit{aircrack-ng} und \textit{pyrit} ca. 30\,\% schneller als \textit{hashcat} sind. Dafür unterstützen die schnelleren keine Passwortmasken, sprich für zufällige Passwörter muss ein Wörterbuch generiert werden.
+% pyrit und aricrack: 1.53k
+% hashcat 1.18k
