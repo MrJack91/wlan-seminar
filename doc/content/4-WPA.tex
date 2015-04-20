@@ -3,7 +3,7 @@
 
 \section{WPA Einführung}
 Das \gls{wpaLabel} Protokoll wurde als notwendiger Nachfolger des \gls{wepLabel} Protokolls definiert.
-Zur selben Zeit war der weiterführender, sehr umfangreichen Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, der aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen war.
+Zur selben Zeit war der weiterführende sehr umfangreiche Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, der aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen war.
 So wurden Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
 Seit September 2004 gibt es zertifizierte \gls{wpa2Label} Netzwerkgeräte. Das \gls{wpa2Label} Protokoll entspricht nun dem \textit{\gls{ieeeLabel} 802.11i} Standard.
 \gls{wpaLabel} nutzt das \gls{tkipLabel} zur Verschlüsselung, während \gls{wpa2Label} den \gls{aesLabel} verwendet.\footcite{Wi-Fi_Protected_Access__Wikipedia_2015-04-10}\footcite{WPA2__Wikipedia_2015-04-10}
@@ -18,12 +18,12 @@ Ein erfolgreicher Angriff kann bisher nur via \gls{glos:bruteforceLabel}- und W�
 %\todo{Box mit sicherem Passwort:  (mind. 16 zufälligen alphanumerischen Zeichen)}
 
 Die ganze Sicherheit basiert auf dem \gls{pskLabel}.
-Sobald der bekannt ist, kann eine Kommunikation problemlos mitgehört werden.
-Sprich trotz einem sicheren Schlüssel, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, insofern die nicht andersartig verschlüsselt werden (z.B. mit \gls{httpsLabel}).
+Sobald dieser bekannt ist, kann eine Kommunikation problemlos mitgehört werden.
+Sprich trotz eines sicheren Schlüssels, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, sofern die nicht andersartig verschlüsselt werden (z.B. mit \gls{httpsLabel}).
 
 
 \subsection{Authentifizierungs-Varianten}
-\gls{wpaLabel} bietet nebst der \gls{pskLabel} Methode (die auch als \textit{\gls{wpaLabel}-Personal} bekannt ist), auch eine \textit{enterprise} Methode an.
+\gls{wpaLabel} bietet nebst der \gls{pskLabel} Methode (die auch als \textit{\gls{wpaLabel}-Personal} bekannt ist), zusätzlich eine \textit{enterprise} Methode an.
 Dabei wird ein Authentifizierung-Server verwendet, der jeden Nutzer einzeln authentifiziert und für jede Sitzung einen neuen \gls{pmkLabel} generiert.
 Das \textit{enterprise} Protokoll wird oft in Firmen angewendet, lohnt sich jedoch für den privaten Gebrauch nicht, da der Einrichtungsaufwand und Betrieb eines eigenen Servers zu hoch ist.
 Deshalb wird in dieser Arbeit auf die \gls{pskLabel} Methode eingegangen.
@@ -37,7 +37,7 @@ Dazu gibt es folgende vier Methoden:\footcite{Wi-Fi_Protected_Setup_-_Wikipedia_
 	\item \textbf{PIN:} Ein 8-stelliger PIN des einen Gerätes muss auf dem anderen eingegeben werden.
 	\item \textbf{Push button:} Per Kopfdruck am \gls{apLabel} wird eine zweiminütige Beitrittsphase des Netzwerkes gestartet.
 	\item \textbf{\gls{nfcLabel}:} Die Daten werden via \gls{nfcLabel} ausgetauscht (was nur innerhalb kurzer Distanz möglich ist).
-	\item \textbf{\gls{usbLabel}:} Die Netzinformationen werden via externen \gls{usbLabel} Storage ausgetauscht.
+	\item \textbf{\gls{usbLabel}:} Die Netzinformationen werden via einen externen \gls{usbLabel} Storage ausgetauscht.
 \end{itemize}
 
 Die PIN Methode gilt als besonders unsicher, da lediglich eine 7-stellige Zahl erraten werden muss (die letzte entfällt, da sie einer Checksumme entspricht).
@@ -82,7 +82,7 @@ Um einen Schlüssel zu knacken werden zusammengefasst folgende Informationen geb
 	\item \gls{micLabel}: entspricht dem Hash der Nutzdaten. Dieser wird als korrekt verschlüsselte Nachricht verwendet. Sprich beim Ausprobieren der möglichen Schlüssel, kommt mit dem gesuchten \gls{pskLabel} derselbe \gls{micLabel}-Wert zustande.
 \end{itemize}
 
-Nebst während dem \textit{Four-Way Handshake}, werden diese Information auch regelmässig wiederholt.
+Während dem \textit{Four-Way Handshake}, werden diese Information regelmässig wiederholt.
 So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 
@@ -90,9 +90,10 @@ So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 \subsection{Angriffsmethode}
 Für einen erfolgreichen Angriff müssen mindestens zwei Teile eines \textit{Four-Way Handshake} vorliegen.
-Dazu müssen die Aktivitäten eines Channel, wie im \cref{subsec:wep_crack_tutorial} wird, abgehört und gespeichert werden (z.B. mit \textit{airport}).
+Dazu müssen die Aktivitäten eines Channel, wie im \cref{subsec:wep_crack_tutorial} behandelt wird, abgehört und gespeichert werden (z.B. mit \textit{airport}).
 
-Falls sich keine Clients neu anmelden, können wie folgt bestehende Clients rausgeschmissen werden:
+%Falls sich keine Clients neu anmelden, können wie folgt bestehende Clients rausgeschmissen werden:
+Falls sich keine Clients neu anmelden, kann wie folgt ein verbundener Client zu erneutem \textit{Four-Way Handshake} gezwungen werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aireplay-ng --deauth 1 -a A4:52:6F:8A:9F:01 -c 2c:f0:ee:20:7c:32 en0
 \end{lstlisting}
@@ -217,7 +218,7 @@ Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen,
 
 \begin{framed}
 	\textbf{Bemerkung:} Dazu wird allerdings die neuste \textit{aircrack-ng} Version \textit{"`1.2-rc2"'} benötigt, welche nicht in \textit{Homebrew} vorhanden ist und daher selbst kompiliert werden muss. Die Installation ist auf der \textit{aircrack-ng} Website beschrieben.\\
-	Trotzdem, dass beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend eine lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
+	Obwohl beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend eine lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
 \end{framed}
 
 Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. Im konkreten vorliegenden Beispiel also: \textit{YHX-02427.hccap}.
@@ -260,14 +261,15 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 
 Die Geschwindigkeit auf dem Testsystem beträgt $1.18k\,hashes/sec$.
 
-Folgende Ausgabe erscheint: (mit \textit{enter} kann jeweils der Status abgefragt werden)
+\clearpage
+Folgende Ausgabe erscheint (mit \textit{enter} kann jeweils der Status abgefragt werden):
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/hashcat_bruteforce_pattern.png}
 	\caption[hashcat: Bruteforce mit Passwortmaske -- Terminalausgabe]{hashcat: \gls{glos:bruteforceLabel} mit Passwortmaske -- Terminalausgabe}\label{fig:hashcat_bruteforce_pattern}
 	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angabe für kleinere Passwörter korrekt ist.\\
 	Die Anzahl der zu testenden Wörter ist um den Faktor $10^5$ grösser.
-	Anstatt die gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
+	Anstatt der gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
 \end{figure}
 
 Obwohl wir relativ viele Informationen zum \gls{pskLabel} besitzen und die Länge nicht übermässig lang gewählt ist, werden wir höchstwahrscheinlich den \gls{pskLabel} nicht herausfinden.
@@ -298,7 +300,7 @@ Daraus kann die Dauer des Angriffes wie folgt berechnet werden:
 	\end{split}
 \end{equation}
 
-\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Schlüssels. Würde man alle Möglichkeiten ausprobieren dauert der Angriff 213 Billionen Jahre.
+\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Schlüssels. Würde man alle Möglichkeiten ausprobieren dauerte der Angriff 213 Billionen Jahre.
 
 Bekannterweise hängt die Rechenzeit $t_R$ stark von der Schlüssellänge ab.
 Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschaulichen jene Abhängigkeit, basierend auf den Kriterien des zu knackenden Schlüssels.
@@ -354,7 +356,7 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 
 
 \subsubsection{Verbesserungsmöglichkeiten und Beschleunigungen}
-Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man abhängig der Grafikkarte $40k\,hashes/sec$ bis $60k\,hashes/sec$. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
+Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man je nach Grafikkarte $40k\,hashes/sec$ bis $60k\,hashes/sec$. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
 
 Da der Aufwand des Angriffes auf die Berechnungen der Hashes zurückzuführen ist, kann alternativ eine bereits ausgerechnete \gls{glos:rainbowTableLabel} verwendet werden.
 Abhängig der Hardware können so $200'000k\,hashes/sec$ getestet werden. Dies wiederum entspricht gegenüber dem traditionellen \gls{cpuLabel} Angriff eine 200'000-fache Beschleunigung.\footcite[][160]{WrightCache201503}
@@ -367,7 +369,7 @@ Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von
 
 Wenn wir die benötige Rechenzeit mit der durchschnittlichen Einsatzdauer eines Routers vergleichen, erkennt man, dass die \gls{pskLabel}-Länge mit mehr als genügender Sicherheit gewählt wurde.
 
-Die Sicherheit gilt solange kein anderer Weg als ein \gls{glos:bruteforceLabel}-Angriff bekannt ist.
+Die Sicherheit ist solange kein anderer Weg als ein \gls{glos:bruteforceLabel}-Angriff bekannt gewährleistet.
 
 Bei den verwendeten Programmen fällt auf, dass \textit{aircrack-ng} und \textit{pyrit} ca. 30\,\% schneller als \textit{hashcat} sind. Dafür unterstützen die schnelleren keine Passwortmasken, sprich für zufällige Passwörter muss ein Wörterbuch generiert werden.
 % pyrit und aricrack: 1.53k

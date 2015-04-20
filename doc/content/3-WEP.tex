@@ -2,18 +2,18 @@
 \label{ch:wep}
 
 \section{WEP Einführung}
-Als erstes, weit verbreitetes Sicherheitsprotokoll hat sich \acrfull{wepLabel} durchgesetzt.
-Trotzdem, dass \gls{wepLabel} grosse Schwachstellen und Sicherheitslücken aufweist und diese seit langem (2001) auch bekannt sind, wird \gls{wepLabel} immer noch angewendet (einerseits von alten Geräten, aber auch neue, die aus Kompatibilitätsgründen verschiedene Sicherheitsprotokolle anbieten).
+Als erstes weit verbreitetes Sicherheitsprotokoll hat sich \acrfull{wepLabel} durchgesetzt.
+Obwohl das \gls{wepLabel} grosse Schwachstellen und Sicherheitslücken aufweist und diese seit langem (2001) auch bekannt sind, wird \gls{wepLabel} immer noch angewendet (einerseits von alten Geräten, aber auch neuen, die aus Kompatibilitätsgründen verschiedene Sicherheitsprotokolle anbieten).
 Da \gls{wepLabel} als veraltet gilt und offiziell abgelöst wurde, wird nicht genau auf technische Einzelheiten eingegangen.
 
 Der Schlüssel ist theoretisch 64 oder 128 Bits lang.
-Da davon jedoch 24 Bits für den \gls{ivLabel} verwendet werde, und der unverschlüsselt übermittelt wird, kürzt sich die Schlüssellänge erheblich.
+Weil davon jedoch 24 Bits für den \gls{ivLabel} verwendet werdenf, und dieser unverschlüsselt übermittelt wird, kürzt sich die Schlüssellänge erheblich.
 Sprich die effektive Länge des Schlüssel ist 40 oder 104 Bits.
 %Die verkürzte Schlüssellänge ist jedoch nicht das Hauptproblem von \gls{wepLabel}.
 
 \section{Angriff auf WEP}
-Nebst fehlerhaften \gls{wepLabel} Implementationen konkreter Hersteller, können allgemeine \gls{wepLabel}-Angriffe in zwei Kategorien eingeteilt werden.\footcite[][126ff.]{WrightCache201503}:
-In Netzwerke mit aktiven Clients (und entsprechendem Datenverkehr) und solche ohne aktive Clients.
+Nebst fehlerhaften \gls{wepLabel} Implementationen konkreter Hersteller, können allgemeine \gls{wepLabel}-Angriffe in zwei Kategorien eingeteilt werden:\footcite[][126ff.]{WrightCache201503}
+In Netzwerke mit aktiven Clients (und entsprechendem Datenverkehr) und in solche ohne aktive Clients.
 
 \subsection{Angriff mit einem Opfer Client (WEP)}
 Der Angriff auf ein Netzwerk mit Clients ist einfacher, kann jedoch mehr Geduld beanspruchen.
@@ -23,7 +23,7 @@ Ein durchgeführtes Beispiel ist im \secref{sec:wepAttack} dokumentiert.
 
 \subsection{Angriff ohne einem Opfer Client (WEP)}
 Ein Angriff auf ein Netzwerk ohne Clients ist aufwändiger.
-Die notwendigen Schritten des Angriffes werden kurz erläutert:\footcite[][129ff.]{WrightCache201503}
+Die notwendigen Schritte des Angriffes werden kurz erläutert:\footcite[][129ff.]{WrightCache201503}
 \begin{enumerate}
 	\item Daten eines Channels aufzeichnen\\
 	\texttt{airodump-ng} (ergibt eine \textit{*.cap} Datei)
@@ -47,7 +47,7 @@ Die notwendigen Schritten des Angriffes werden kurz erläutert:\footcite[][129ff
 
 \begin{framed}
 	\textbf{Bemerkung:} Dieser Angriff wurde nicht durchgeführt, da das \textit{inject} (senden eines selbst gebauten Paketes) nur von speziellen Netzwerkkarten unterstützt wird.\footcite[][89ff.]{WrightCache201503}
-	Zu jenen die des \textit{Mac Book Air's} nicht gehört.
+	Die Netzwerkkarte des \textit{Mac Book Air's} unterstützt kein \textit{inject}.
 \end{framed}
 
 
@@ -56,7 +56,6 @@ Die notwendigen Schritten des Angriffes werden kurz erläutert:\footcite[][129ff
 Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgeführt.
 
 \subsection{Setup}
-\subsubsection{Hardware}
 Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein ältere Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen \gls{pskLabel} eingerichtet.
 
 \subsection{Ausführung}
@@ -89,12 +88,12 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 sudo airport en0 sniff <CHANNEL>
 \end{lstlisting}
 
-Anschliessend können die Daten, vom \textit{Sniffer} mit dem \textit{aircrack-ng} ausgewertet werden:
+Anschliessend können die Daten des \textit{Sniffers} mit dem \textit{aircrack-ng} ausgewertet werden:
 \begin{lstlisting}[style=lstStyleFramed]
 aircrack-ng -b 00:0f:cc:b0:1a:c8 /private/tmp/airportSniff*.cap
 \end{lstlisting}
 
-So wird einem, falls genügend \gls{ivLabel}'s vorhanden sind, der \gls{wepLabel} ausgegeben (Dauer: 2 Sek.).
+So wird, falls genügend \gls{ivLabel}'s vorhanden sind, der \gls{wepLabel} ausgegeben (Dauer: 2 Sek.).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/wep/aircrack-ng.png}
