@@ -7,7 +7,7 @@ Obwohl das \gls{wepLabel} grosse Schwachstellen und Sicherheitslücken aufweist 
 Da \gls{wepLabel} als veraltet gilt und offiziell abgelöst wurde, wird nicht genau auf technische Einzelheiten eingegangen.
 
 Der Schlüssel ist theoretisch 64 oder 128 Bits lang.
-Weil davon jedoch 24 Bits für den \gls{ivLabel} verwendet werdenf, und dieser unverschlüsselt übermittelt wird, kürzt sich die Schlüssellänge erheblich.
+Weil davon jedoch 24 Bits für den \gls{ivLabel} verwendet werden, und dieser unverschlüsselt übermittelt wird, kürzt sich die Schlüssellänge erheblich.
 Sprich die effektive Länge des Schlüssel ist 40 oder 104 Bits.
 %Die verkürzte Schlüssellänge ist jedoch nicht das Hauptproblem von \gls{wepLabel}.
 
@@ -56,7 +56,7 @@ Die notwendigen Schritte des Angriffes werden kurz erläutert:\footcite[][129ff.
 Folgend wird ein erfolgreicher Angriff auf ein \gls{wepLabel}-Netzwerk durchgeführt.
 
 \subsection{Setup}
-Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein ältere Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen \gls{pskLabel} eingerichtet.
+Nebst der in \secref{sec:testEnvroiment} beschriebene Hardware wurde ein älterer Swisscom Router \textit{Netopia  3357NWG}\footcite{Netopia_3347_57nwg_de_2015-04-06} verwendet. Der Router wurde mit einem 10-stelligen hexadezimalen \gls{pskLabel} eingerichtet.
 
 \subsection{Ausführung}
 \label{subsec:wep_crack_tutorial}
@@ -69,7 +69,7 @@ Mit dem \textit{Scan} Programm können verfügbare Netze und deren Channels gefu
 	\caption{OS X Wireless Diagnostics: Scanner}
 \end{figure}
 
-Mit dem \textit{Sniffer} können benötigte Daten aus einem konkreten Netz aufgezeichnet werden. Es werden ca. 5'000 \gls{ivLabel}'s benötigt um den Schlüssel zu berechnen. Eine solche Aufzeichnung (capture) dauert unterschiedlich lange, je nach Nutzung des Netzes. Wird das Netz viel gebraucht, geht es schneller.
+Mit dem \textit{Sniffer} können benötigte Daten aus einem konkreten Netz aufgezeichnet werden. Es werden ca. 5'000 \gls{ivLabel}'s benötigt, um den Schlüssel zu berechnen. Eine solche Aufzeichnung (capture) dauert unterschiedlich lange, je nach Nutzung des Netzes. Wird das Netz viel gebraucht, geht es schneller.
 
 \begin{figure}[H]
 	\centering

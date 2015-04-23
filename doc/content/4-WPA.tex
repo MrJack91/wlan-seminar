@@ -3,7 +3,7 @@
 
 \section{WPA Einführung}
 Das \gls{wpaLabel} Protokoll wurde als notwendiger Nachfolger des \gls{wepLabel} Protokolls definiert.
-Zur selben Zeit war der weiterführende sehr umfangreiche Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, der aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen war.
+Zur selben Zeit war der weiterführende sehr, umfangreiche Standard \textit{\gls{ieeeLabel} 802.11i} in Arbeit, der aber zum Zeitpunkt als \gls{wepLabel} geknackt wurde noch nicht abgeschlossen war.
 So wurden Anfangs 2003 die ersten zertifizierten \gls{wpaLabel}-fähigen \gls{wlanLabel}-Geräte auf den Markt gebracht.
 Seit September 2004 gibt es zertifizierte \gls{wpa2Label} Netzwerkgeräte. Das \gls{wpa2Label} Protokoll entspricht nun dem \textit{\gls{ieeeLabel} 802.11i} Standard.
 \gls{wpaLabel} nutzt das \gls{tkipLabel} zur Verschlüsselung, während \gls{wpa2Label} den \gls{aesLabel} verwendet.\footcite{Wi-Fi_Protected_Access__Wikipedia_2015-04-10}\footcite{WPA2__Wikipedia_2015-04-10}
@@ -19,7 +19,7 @@ Ein erfolgreicher Angriff kann bisher nur via \gls{glos:bruteforceLabel}- und W�
 
 Die ganze Sicherheit basiert auf dem \gls{pskLabel}.
 Sobald dieser bekannt ist, kann eine Kommunikation problemlos mitgehört werden.
-Sprich trotz eines sicheren Schlüssels, kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, sofern die nicht andersartig verschlüsselt werden (z.B. mit \gls{httpsLabel}).
+Sprich trotz eines sicheren Schlüssels kann jeder Netzteilnehmer aktive Verbindungen der anderen abhören, sofern die nicht andersartig verschlüsselt werden (z.B. mit \gls{httpsLabel}).
 
 
 \subsection{Authentifizierungs-Varianten}
@@ -79,10 +79,10 @@ Um einen Schlüssel zu knacken werden zusammengefasst folgende Informationen geb
 	\item \textit{B-nonce}
 	\item \gls{macLabel}-Adresse des Clients
 	\item \gls{macLabel}-Adresse des \gls{apLabel}'s
-	\item \gls{micLabel}: entspricht dem Hash der Nutzdaten. Dieser wird als korrekt verschlüsselte Nachricht verwendet. Sprich beim Ausprobieren der möglichen Schlüssel, kommt mit dem gesuchten \gls{pskLabel} derselbe \gls{micLabel}-Wert zustande.
+	\item \gls{micLabel}: entspricht dem Hash der Nutzdaten. Dieser wird als korrekt verschlüsselte Nachricht verwendet. Beim Ausprobieren der möglichen Schlüssel kommt mit dem gesuchten \gls{pskLabel} derselbe \gls{micLabel}-Wert zustande.
 \end{itemize}
 
-Während dem \textit{Four-Way Handshake}, werden diese Information regelmässig wiederholt.
+Während dem \textit{Four-Way Handshake}, werden diese Informationen regelmässig wiederholt.
 So muss nicht zwingend ein vollständiger \textit{Four-Way Handshake} vorliegen.
 
 
@@ -111,9 +111,9 @@ Es gibt verschiedene Programme die den \gls{glos:bruteforceLabel} durchführen k
 Einige davon sind im \cref{subsec:wpa_attack_tutorial} dokumentiert.
 
 Die Berechnung ist je nach Schlüssellänge und bekannten Schlüsselinformationen sehr intensiv und wird daher oft statt von der \gls{cpuLabel}, von der \gls{gpuLabel}, sprich der Grafikkarte, ausgerechnet.
-Ausserdem kann die Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechner, in der \textit{"`\gls{glos:cloudLabel}"'} ausgeführt werden.
+Ausserdem kann die Berechnung anstatt von einem \textit{\gls{glos:onPremiseLabel}} Rechner in der \textit{"`\gls{glos:cloudLabel}"'} ausgeführt werden.
 
-Damit nicht alle mögliche Kombinationen, die aus den druckbaren \gls{asciiLabel} Zeichen erstellt werden können, durchprobiert werden müssen, werden oft nur Wörter aus einem definierten Wörterbuch probiert.
+Damit nicht alle möglichen Kombinationen, die aus den druckbaren \gls{asciiLabel} Zeichen erstellt werden können, durchprobiert werden müssen, werden oft nur Wörter aus einem definierten Wörterbuch probiert.
 Manche Programme unterstützen auch Passwortmasken, durch die nebst der Schlüssellänge auch pro Zeichenposition eine Auswahl an Zeichen definiert werden kann. So kann die Rechenzeit bei genügend Informationen erheblich reduziert werden.
 
 
@@ -128,15 +128,16 @@ In diesem \cref{subsec:wpa_attack_tutorial} basieren viele Inhalte auf dem Buch 
 Folgend wird das \gls{wpa2Label}-Testnetz mit der \gls{ssidLabel} \textit{YHX-02427} als Angriffsziel verwendet.
 Das Netz wird durch den aktuellen Swisscom-Router \textit{Centro grande} zur Verfügung gestellt. \footcite{Centro_grande_Analog_Standard_-_WLAN_Router_Swisscom_2015-04-15}
 
-Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entsprechen dem Auslieferungszustand.
+Die Konfiguration, unter anderem die \gls{ssidLabel} und der \gls{pskLabel}, entspricht dem Auslieferungszustand.
 Darum sind folgende Eigenschaften des \gls{pskLabel}'s im Vorhinein bekannt:
 \begin{itemize}
-	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`-"' (Minus). Sprich die Länge beträgt total 19 Zeichen, wovon drei bereits bekannt sind (die Minuszeichen).
+	\item Der \gls{pskLabel} besteht aus vier-mal-vier Zeichen getrennt durch ein "`-"' (Minus). Die Länge beträgt total 19 Zeichen, wovon drei bereits bekannt sind (die Minuszeichen).
 	\item Eine vierstellige Zeichenfolge besteht ausschliesslich aus Kleinbuchstaben und Zahlen.
 \end{itemize}
 
-Für die Wörterbuch-Angriffe wird jeweils ein Wörterbuch verwendet, dass unter anderem auch den korrekten Schlüssel beinhaltet.
-Wörterbuch-Angriffe eignen sich für zufällig generierte Schlüssel nicht, da keine bekannte Wörter verwendet werden, werden aber hier exemplarisch trotzdem verwendet.
+Für die Wörterbuch-Angriffe wird jeweils ein Wörterbuch verwendet, das unter anderem auch den korrekten Schlüssel beinhaltet.
+Wörterbuch-Angriffe eignen sich für zufällig generierte Schlüssel nicht, da keine bekannten Wörter verwendet werden.
+Dementsprechend stellen die folgenden verwendeten Wörterbücher eher eine Auflistung aller möglichen Kombinationen dar.
 
 Es werden drei verschiedene Programme (\textit{crack utilities}) verwendet:
 %\footcite{Aircrack-ng_2015-04-06}
@@ -169,9 +170,9 @@ Angenommen ein gültiger \textit{Four-Way Handshake} wurde aufgezeichnet, entfer
 \begin{lstlisting}[style=lstStyleFramed]
 pyrit -r YHX-02427_raw.cap -o YHX-02427.cap strip
 \end{lstlisting}
-Anschliessend wird man aufgefordert die gewünschte \gls{ssidLabel} auszuwählen.
+Anschliessend wird man aufgefordert, die gewünschte \gls{ssidLabel} auszuwählen.
 Bei meinen Tests schrumpften Dateien von 20\,MB auf 8\,KB.
-Übrig bleiben nur noch die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel}.
+Übrig bleiben nur die Handshakes von \gls{wpaLabel} und die \gls{ivLabel}'s von \gls{wepLabel}.
 
 \subsubsection{Aircrack-ng: Bruteforce mit Wörterbuch}
 Anschliessend kann bereits ein \textit{aircrack-ng} \gls{glos:bruteforceLabel}-Angriff ausgeführt werden:
@@ -221,9 +222,9 @@ Um mit \textit{hashcat} einen \gls{glos:bruteforceLabel}-Angriff durchzuführen,
 	Obwohl beim Kompilieren Fehler angezeigt werden, befindet sich anschliessend eine lauffähige \textit{aircrack-ng} Datei im \textit{src} Ordner, mit der die \textit{.hccap} Datei generiert werden kann.
 \end{framed}
 
-Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. Im konkreten vorliegenden Beispiel also: \textit{YHX-02427.hccap}.
+Es wird eine neue Datei mit \textit{[\gls{ssidLabel}].hccap} erstellt. Im konkreten vorliegenden Beispiel also \textit{YHX-02427.hccap}.
 
-Nebst dem wird der \textit{A-nonce ("`anonce"')}, \textit{B-nonce ("`snonce"')} und der \textit{\gls{micLabel} ("`Key MIC"')} angezeigt.
+Daneben wird der \textit{A-nonce ("`anonce"')}, der \textit{B-nonce ("`snonce"')} und der \textit{\gls{micLabel} ("`Key MIC"')} angezeigt.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/conversion_cap2hccap.png}
@@ -256,7 +257,7 @@ hashcat -m 2500 -a 3 --pw-min=19 --pw-max=19 YHX-02427.hccap -1 ?l?d ?1?1?1?1-?1
 	-{}-pw-min/max & min. und max. Länge des \gls{pskLabel}\\
 	*.hccap & \textit{capture}-Datei mit mind. einem Handshake\\
 	-1 & Pattern mit alphanumerisch (nur Kleinbuchstaben \textit{?l} und Zahlen \textit{?d})\\
-	$[mask]$ & Passwort Maske (mit zuvor definiertem Pattern (\textit{-1}))\\
+	$[mask]$ & Passwort Maske mit zuvor definiertem Pattern (\textit{-1})\\
 \end{tabular}
 
 Die Geschwindigkeit auf dem Testsystem beträgt $1.18k\,hashes/sec$.
@@ -267,7 +268,7 @@ Folgende Ausgabe erscheint (mit \textit{enter} kann jeweils der Status abgefragt
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/wpa/hashcat_bruteforce_pattern.png}
 	\caption[hashcat: Bruteforce mit Passwortmaske -- Terminalausgabe]{hashcat: \gls{glos:bruteforceLabel} mit Passwortmaske -- Terminalausgabe}\label{fig:hashcat_bruteforce_pattern}
-	\floatfoot{\textbf{Bemerkung zur obriger \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf ein programminterner \textit{Overflow} zurückzuführen, da die Angabe für kleinere Passwörter korrekt ist.\\
+	\floatfoot{\textbf{Bemerkung zur obrigen \cref{fig:hashcat_bruteforce_pattern}:} Dem sehr aufmerksamen Leser fällt auf, dass die Anzahl der Worte (\textit{words}) nicht korrekt ist. Dies ist mit hoher Wahrscheinlichkeit auf einen programminternen \textit{Overflow} zurückzuführen, da die Angabe für kleinere Passwörter korrekt ist.\\
 	Die Anzahl der zu testenden Wörter ist um den Faktor $10^5$ grösser.
 	Anstatt der gegebenen $1.63 * 10^{19}$ ist $ 36^{16} = 7.96 * 10^{24} $ korrekt.}
 \end{figure}
@@ -300,10 +301,10 @@ Daraus kann die Dauer des Angriffes wie folgt berechnet werden:
 	\end{split}
 \end{equation}
 
-\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Schlüssels. Würde man alle Möglichkeiten ausprobieren dauerte der Angriff 213 Billionen Jahre.
+\cref{eqn:wpa_attack_duration_hours} verdeutlicht die Sicherheit des Schlüssels. Würde man alle Möglichkeiten ausprobieren, dauerte der Angriff 213 Billionen Jahre.
 
 Bekannterweise hängt die Rechenzeit $t_R$ stark von der Schlüssellänge ab.
-Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschaulichen jene Abhängigkeit, basierend auf den Kriterien des zu knackenden Schlüssels.
+Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschaulichen jene Abhängigkeit, basierend auf den Kriterien des zu knackenden Schlüssels (bei bekannter Schlüssellänge).
 
 \begin{figure}[H]
 	\begin{minipage}[b]{.45\linewidth}
@@ -356,7 +357,7 @@ Folgende \cref{fig:wpa_attack_linear} und \cref{fig:wpa_attack_log} veranschauli
 
 
 \subsubsection{Verbesserungsmöglichkeiten und Beschleunigungen}
-Lässt man anstelle der \gls{cpuLabel} die \gls{gpuLabel} die Hashes berechnen, erreicht man je nach Grafikkarte $40k\,hashes/sec$ bis $60k\,hashes/sec$. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
+Lässt man anstelle der \gls{cpuLabel}, die \gls{gpuLabel} die Hashes berechnen, erreicht man je nach Grafikkarte $40k\,hashes/sec$ bis $60k\,hashes/sec$. Dies entspricht ungefähr einer 50-fachen Beschleunigung.\footcite[][158]{WrightCache201503}
 
 Da der Aufwand des Angriffes auf die Berechnungen der Hashes zurückzuführen ist, kann alternativ eine bereits ausgerechnete \gls{glos:rainbowTableLabel} verwendet werden.
 Abhängig der Hardware können so $200'000k\,hashes/sec$ getestet werden. Dies wiederum entspricht gegenüber dem traditionellen \gls{cpuLabel} Angriff eine 200'000-fache Beschleunigung.\footcite[][160]{WrightCache201503}
@@ -369,8 +370,8 @@ Schlussendlich folgt, dass für \gls{wpaLabel} trotz massiver Beschleunigung von
 
 Wenn wir die benötige Rechenzeit mit der durchschnittlichen Einsatzdauer eines Routers vergleichen, erkennt man, dass die \gls{pskLabel}-Länge mit mehr als genügender Sicherheit gewählt wurde.
 
-Die Sicherheit ist solange kein anderer Weg als ein \gls{glos:bruteforceLabel}-Angriff bekannt gewährleistet.
+Die Sicherheit ist gewährleistet, solange keine andere Methode als der \gls{glos:bruteforceLabel}-Angriff bekannt ist.
 
-Bei den verwendeten Programmen fällt auf, dass \textit{aircrack-ng} und \textit{pyrit} ca. 30\,\% schneller als \textit{hashcat} sind. Dafür unterstützen die schnelleren keine Passwortmasken, sprich für zufällige Passwörter muss ein Wörterbuch generiert werden.
+Bei den verwendeten Programmen fällt auf, dass \textit{aircrack-ng} und \textit{pyrit} ca. 30\,\% schneller als \textit{hashcat} sind. Dafür unterstützen die schnelleren keine Passwortmasken; sprich für zufällige Passwörter muss ein Wörterbuch generiert werden.
 % pyrit und aricrack: 1.53k
 % hashcat 1.18k
